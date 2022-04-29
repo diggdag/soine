@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Background" representedClassName="Background" syncable="YES">
+    <entity name="SoineData" representedClassName="SoineData" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="picture" optional="YES" attributeType="Binary"/>
         <attribute name="scale" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="voice" optional="YES" attributeType="Binary"/>
+        <attribute name="voiceFileExtention" optional="YES" attributeType="String"/>
+        <attribute name="voiceName" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Background" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="SoineData" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

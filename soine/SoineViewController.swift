@@ -10,14 +10,72 @@ import CoreData
 import Photos
 
 class SoineViewController: UIViewController {
-    @IBOutlet weak var image: UIView!
+    @IBOutlet weak var imageView: UIView!
+    
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
+    var audioPlayer:AVAudioPlayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("-------------- SoineViewController viewDidLoad --------------")
+        var image:UIImage? = nil
+        var scale:CGFloat = CGFloat(1)
+        var voice: Data?
+//        var voiceName: String?
+        var voiceFileExtention: String?
+
+        var appDelegate:AppDelegate!
+        var viewContext:NSManagedObjectContext!
+
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         viewContext = appDelegate.persistentContainer.viewContext
-        Utilities.setBackground_init(playerView: &image, _id: 0,toSoine: true)
+
+        let query: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+
+        do {
+            let fetchResults = try viewContext.fetch(query)
+            if fetchResults.count != 0 {
+                for result: AnyObject in fetchResults {
+                    let id: Int16 = result.value(forKey: "id") as! Int16
+
+                    if Consts.IMAGE_ID_SOINE == id {
+                        image = UIImage(data: result.value(forKey: "picture") as! Data)
+                        scale = result.value(forKey: "scale") as! CGFloat
+                        voice = result.value(forKey: "voice") as? Data
+//                        voiceName = result.value(forKey: "voiceName") as? String
+                        voiceFileExtention = result.value(forKey: "voiceFileExtention") as? String
+                    }
+                }
+            }
+            
+            //画像をセットする
+            Utilities.settingBackground(playerView: &imageView, _image: image ?? UIImage(),scale: scale,initial: true)
+            
+            //ここからボイス
+            audioPlayer = try AVAudioPlayer(data: voice!,fileTypeHint: voiceFileExtention)
+
+            // AVAudioPlayerのデリゲートをセット
+            audioPlayer.delegate = self
+
+            // 音声の再生
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+        } catch  let e as NSError{
+            print("error !!! : \(e)")
+        }
+        
+//        appDelegate = UIApplication.shared.delegate as? AppDelegate
+//        viewContext = appDelegate.persistentContainer.viewContext
+//        Utilities.setBackground_init(playerView: &imageView, _id: Consts.IMAGE_ID_SOINE,toSoine: true)
+    }
+}
+///////////////////////////
+///extentions
+//////////////////////
+///
+extension SoineViewController: AVAudioPlayerDelegate{
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool){
+        print("call audioPlayerDidFinishPlaying !!!")
     }
 }

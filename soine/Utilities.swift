@@ -22,7 +22,7 @@ class Utilities {
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         viewContext = appDelegate.persistentContainer.viewContext
         
-        let query: NSFetchRequest<Background> = Background.fetchRequest()
+        let query: NSFetchRequest<SoineData> = SoineData.fetchRequest()
         
         do {
             let fetchResults = try viewContext.fetch(query)

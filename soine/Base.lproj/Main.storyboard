@@ -32,7 +32,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="7gs-B6-7uV"/>
                     <connections>
-                        <outlet property="image" destination="CsL-un-fR9" id="tka-gy-bcy"/>
+                        <outlet property="imageView" destination="CsL-un-fR9" id="tka-gy-bcy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ol0-fq-9wl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -230,6 +230,7 @@
                     <connections>
                         <outlet property="bg" destination="blA-AX-cwg" id="osD-n4-QBY"/>
                         <outlet property="versionLabel" destination="xHt-fN-rHg" id="iZK-KQ-96a"/>
+                        <outlet property="voiceLabel" destination="XAU-aE-8dV" id="OWU-Ge-dKE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s34-3B-i8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
