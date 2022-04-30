@@ -173,57 +173,69 @@ class SettingsTableViewController: UITableViewController{
 //}
 extension SettingsTableViewController:UIDocumentPickerDelegate{
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        print(url) // ここにURLが入っている
-        let fileName = url.lastPathComponent
-        let fileExtention = url.pathExtension
-//        let audioPath = Bundle.main.path(forResource: url.path, ofType:"wav")!
-//        let audioUrl = URL(fileURLWithPath: audioPath)
-//        let audioUrl = URL(string: url.path)!
-//        let audioUrl = URL(fileURLWithPath: url.path)
-        
-        
-        do {
-            print("canOpenURL : \(UIApplication.shared.canOpenURL(url))")
-            print("extention : \(fileExtention)")
-            // AVAudioPlayerのインスタンス化
-//            let audioPlayer = try AVAudioPlayer(contentsOf: url,fileTypeHint: url.pathExtension)
-            let fileData = try Data(contentsOf: url)
+        if (CFURLStartAccessingSecurityScopedResource(url as CFURL)) {
             
-            print("Data : \(fileData)")
+
+            print(url) // ここにURLが入っている
+            let fileName = url.lastPathComponent
+            let fileExtention = url.pathExtension
+    //        let audioPath = Bundle.main.path(forResource: url.path, ofType:"wav")!
+    //        let audioUrl = URL(fileURLWithPath: audioPath)
+    //        let audioUrl = URL(string: url.path)!
+    //        let audioUrl = URL(fileURLWithPath: url.path)
             
-            let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-            var predicate:NSPredicate
-            predicate = NSPredicate(format: "id = \(Consts.IMAGE_ID_SOINE)")
-            request.predicate = predicate
-            var change = false
-            //change
-            let fetchResults = try viewContext.fetch(request)
-            if(fetchResults.count != 0){
-                change = true
-                for result: AnyObject in fetchResults {
-                    let record = result as! NSManagedObject
-                    record.setValue(Consts.IMAGE_ID_SOINE, forKey: "id")
-                    record.setValue(fileName, forKey: "voiceName")
-                    record.setValue(fileExtention, forKey: "voiceFileExtention")
-                    record.setValue(fileData, forKey: "voice")
+            
+            do {
+                print("canOpenURL : \(UIApplication.shared.canOpenURL(url))")
+                print("extention : \(fileExtention)")
+                // AVAudioPlayerのインスタンス化
+    //            let audioPlayer = try AVAudioPlayer(contentsOf: url,fileTypeHint: url.pathExtension)
+                
+    //            let fileData = try Data(NSURL(string: url.path))
+                let fileData = try Data(contentsOf: url)
+    //            UIApplication.OpenExternalURLOptionsKey
+                
+                
+                print("Data : \(fileData)")
+                
+                let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+                var predicate:NSPredicate
+                predicate = NSPredicate(format: "id = \(Consts.IMAGE_ID_SOINE)")
+                request.predicate = predicate
+                var change = false
+                //change
+                let fetchResults = try viewContext.fetch(request)
+                if(fetchResults.count != 0){
+                    change = true
+                    for result: AnyObject in fetchResults {
+                        let record = result as! NSManagedObject
+                        record.setValue(Consts.IMAGE_ID_SOINE, forKey: "id")
+                        record.setValue(fileName, forKey: "voiceName")
+                        record.setValue(fileExtention, forKey: "voiceFileExtention")
+                        record.setValue(fileData, forKey: "voice")
+                    }
+                    try viewContext.save()
                 }
-                try viewContext.save()
+                //add
+                if !change {
+                    let background = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
+                    let newRecord = NSManagedObject(entity: background!, insertInto: viewContext)
+                    newRecord.setValue(Consts.IMAGE_ID_SOINE, forKey: "id")
+                    newRecord.setValue(fileName, forKey: "voiceName")
+                    newRecord.setValue(fileExtention, forKey: "voiceFileExtention")
+                    newRecord.setValue(fileData, forKey: "voice")
+                    appDelegate.saveContext()
+                }
+    //            let audioPlayer = try AVAudioPlayer(contentsOf: url)//要らん処理
+            } catch let e as NSError{
+                print("error !!! : \(e)")
             }
-            //add
-            if !change {
-                let background = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
-                let newRecord = NSManagedObject(entity: background!, insertInto: viewContext)
-                newRecord.setValue(Consts.IMAGE_ID_SOINE, forKey: "id")
-                newRecord.setValue(fileName, forKey: "voiceName")
-                newRecord.setValue(fileExtention, forKey: "voiceFileExtention")
-                newRecord.setValue(fileData, forKey: "voice")
-                appDelegate.saveContext()
-            }
-//            let audioPlayer = try AVAudioPlayer(contentsOf: url)//要らん処理
-        } catch let e as NSError{
-            print("error !!! : \(e)")
+            voiceLabel.text = fileName
+            CFURLStopAccessingSecurityScopedResource(url as CFURL) // <- and here
         }
-        voiceLabel.text = fileName
+        else {
+            print("Permission error!")
+        }
     }
 }
 extension SettingsTableViewController:MPMediaPickerControllerDelegate{
