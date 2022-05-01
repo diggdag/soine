@@ -92,8 +92,11 @@ extension ViewController:UITableViewDataSource{
         let cell: TableViewCell_list = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list") as! TableViewCell_list
     
         let image:UIImage = UIImage(data: account.picture!)!
-        let voiceName: String = account.voiceName == nil ? "" : account.voiceName!
         
+        var voiceName: String = ""
+        if account.voiceFilePath != nil {
+            voiceName = (account.voiceFilePath?.lastPathComponent)!
+        }
             
         cell.setCell(data: Data_list(
             voiceName: voiceName, category: image))

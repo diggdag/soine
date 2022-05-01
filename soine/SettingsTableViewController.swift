@@ -30,7 +30,7 @@ class SettingsTableViewController: UITableViewController{
         viewContext = appDelegate.persistentContainer.viewContext
         var image:UIImage? = nil
         var scale:CGFloat = CGFloat(1)
-        var voiceName: String?
+        var voiceFilePath: URL?
         let query: NSFetchRequest<SoineData> = SoineData.fetchRequest()
 
         do {
@@ -42,7 +42,7 @@ class SettingsTableViewController: UITableViewController{
                     if targetId == id {
                         image = UIImage(data: result.value(forKey: "picture") as! Data)
                         scale = result.value(forKey: "scale") as! CGFloat
-                        voiceName = result.value(forKey: "voiceName") as? String
+                        voiceFilePath = result.value(forKey: "voiceFilePath") as? URL
                     }
                 }
             }
@@ -52,8 +52,8 @@ class SettingsTableViewController: UITableViewController{
         }
         //画像をセットする
         Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale,initial: true)
-        if voiceName != nil {
-            voiceLabel.text = voiceName
+        if voiceFilePath != nil {
+            voiceLabel.text = voiceFilePath?.lastPathComponent
         }
         
 //        Utilities.setBackground_init(playerView: &bg, _id: 0)
@@ -201,7 +201,6 @@ class SettingsTableViewController: UITableViewController{
 //}
 extension SettingsTableViewController:UIDocumentPickerDelegate{
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        if (CFURLStartAccessingSecurityScopedResource(url as CFURL)) {
             print(url) // ここにURLが入っている
             let fileName = url.lastPathComponent
             let fileExtention = url.pathExtension
@@ -209,16 +208,9 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
             do {
                 print("canOpenURL : \(UIApplication.shared.canOpenURL(url))")
                 print("extention : \(fileExtention)")
-                // AVAudioPlayerのインスタンス化
-                let fileData = try Data(contentsOf: url)
-                
-                print("Data : \(fileData)")
                 
                 let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-//                var predicate:NSPredicate
-//                predicate =
                 if targetId != nil {
-//                    request.predicate = NSPredicate(format: "id = \(targetId)")
                     request.predicate = NSPredicate(format: "id = %d", targetId!)
                 }
                 
@@ -228,37 +220,27 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
                 if(fetchResults.count != 0 && targetId != nil){
                     change = true
                     for result: AnyObject in fetchResults {
-                        let record = result as! NSManagedObject
-                        record.setValue(targetId, forKey: "id")
-                        record.setValue(fileName, forKey: "voiceName")
-                        record.setValue(fileExtention, forKey: "voiceFileExtention")
-                        record.setValue(fileData, forKey: "voice")
+                        let record = result as! SoineData
+                        record.id = targetId!
+                        record.voiceFilePath = url
                     }
                     try viewContext.save()
                 }
                 //add
                 if !change {
-                    var next_id = getNextId()
+                    let next_id = getNextId()
                     
-                    let background = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
-                    let newRecord = NSManagedObject(entity: background!, insertInto: viewContext)
-                    newRecord.setValue(next_id, forKey: "id")
-                    newRecord.setValue(fileName, forKey: "voiceName")
-                    newRecord.setValue(fileExtention, forKey: "voiceFileExtention")
-                    newRecord.setValue(fileData, forKey: "voice")
+                    let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
+                    let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
+                    record.id = next_id
+                    record.voiceFilePath = url
                     appDelegate.saveContext()
                     targetId = next_id
                 }
-    //            let audioPlayer = try AVAudioPlayer(contentsOf: url)//要らん処理
             } catch let e as NSError{
                 print("error !!! : \(e)")
             }
             voiceLabel.text = fileName
-            CFURLStopAccessingSecurityScopedResource(url as CFURL) // <- and here
-        }
-        else {
-            print("Permission error!")
-        }
     }
 }
 extension SettingsTableViewController:MPMediaPickerControllerDelegate{

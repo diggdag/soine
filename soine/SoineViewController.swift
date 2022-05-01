@@ -23,9 +23,8 @@ class SoineViewController: UIViewController {
         print("-------------- SoineViewController viewDidLoad --------------")
         var image:UIImage? = nil
         var scale:CGFloat = CGFloat(1)
-        var voice: Data?
-//        var voiceName: String?
-        var voiceFileExtention: String?
+        var voiceFilePath:URL?
+        
 
         var appDelegate:AppDelegate!
         var viewContext:NSManagedObjectContext!
@@ -44,9 +43,9 @@ class SoineViewController: UIViewController {
                     if targetId == id {
                         image = UIImage(data: result.value(forKey: "picture") as! Data)
                         scale = result.value(forKey: "scale") as! CGFloat
-                        voice = result.value(forKey: "voice") as? Data
-//                        voiceName = result.value(forKey: "voiceName") as? String
-                        voiceFileExtention = result.value(forKey: "voiceFileExtention") as? String
+                                                
+                        voiceFilePath = (result.value(forKey: "voiceFilePath") as? URL)!
+                        break
                     }
                 }
             }
@@ -55,14 +54,30 @@ class SoineViewController: UIViewController {
             Utilities.settingBackground(playerView: &imageView, _image: image ?? UIImage(),scale: scale,initial: true)
             
             //ここからボイス
-            audioPlayer = try AVAudioPlayer(data: voice!,fileTypeHint: voiceFileExtention)
+            if voiceFilePath != nil {
+                if (CFURLStartAccessingSecurityScopedResource(voiceFilePath! as CFURL)) {
+                
+                    let fileName = voiceFilePath!.lastPathComponent
+                    let fileExtention = voiceFilePath!.pathExtension
+                    let fileData = try Data(contentsOf: voiceFilePath!)
+                    
+                    
+                    print("Data : \(fileData)")
+                    audioPlayer = try AVAudioPlayer(data: fileData,fileTypeHint: fileExtention)
 
-            // AVAudioPlayerのデリゲートをセット
-            audioPlayer.delegate = self
+                    // AVAudioPlayerのデリゲートをセット
+                    audioPlayer.delegate = self
 
-            // 音声の再生
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
+                    // 音声の再生
+                    audioPlayer.prepareToPlay()
+                    audioPlayer.play()
+                    CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
+                }
+                else {
+                    print("Permission error!")
+                }
+            }
+            //ここまでボイス
         } catch  let e as NSError{
             print("error !!! : \(e)")
         }

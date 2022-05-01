@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		24EAF3723A7F35BFCA1C1229 /* Pods_soineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8981182054219BFC14E4B428 /* Pods_soineTests.framework */; };
 		4E2B583453DE95A491EAAF8C /* Pods_soine_soineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7FE51060977A5E0C9FBAFE /* Pods_soine_soineUITests.framework */; };
-		CF052DB9281BD36800C54EEF /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF052DB7281BD36800C54EEF /* SoineData+CoreDataProperties.swift */; };
-		CF052DBA281BD36800C54EEF /* SoineData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF052DB8281BD36800C54EEF /* SoineData+CoreDataClass.swift */; };
 		CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */; };
 		CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4DA6AF2812EA580084B7E5 /* SettingsTableViewController.swift */; };
 		CF4DA6B72812FC6C0084B7E5 /* Pods_soine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5D8506BB64AC045F4F4074 /* Pods_soine.framework */; };
@@ -28,6 +26,8 @@
 		CFD4CB762812DF4A00D746B2 /* soineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB752812DF4A00D746B2 /* soineTests.swift */; };
 		CFD4CB802812DF4A00D746B2 /* soineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB7F2812DF4A00D746B2 /* soineUITests.swift */; };
 		CFD4CB822812DF4A00D746B2 /* soineUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB812812DF4A00D746B2 /* soineUITestsLaunchTests.swift */; };
+		CFDBCE28281ECDCC00445950 /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBCE26281ECDCC00445950 /* SoineData+CoreDataProperties.swift */; };
+		CFDBCE29281ECDCC00445950 /* SoineData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBCE27281ECDCC00445950 /* SoineData+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,8 +70,6 @@
 		8981182054219BFC14E4B428 /* Pods_soineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_soineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD1CB473C474C49A297E714 /* Pods-soine-soineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soine-soineUITests.release.xcconfig"; path = "Target Support Files/Pods-soine-soineUITests/Pods-soine-soineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE65AD748C9251F6F308D146 /* Pods-soineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soineTests.debug.xcconfig"; path = "Target Support Files/Pods-soineTests/Pods-soineTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CF052DB7281BD36800C54EEF /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CF052DB8281BD36800C54EEF /* SoineData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell_list.swift; sourceTree = "<group>"; };
 		CF4DA6AF2812EA580084B7E5 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		CF4DA6B12812FA8E0084B7E5 /* ImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +92,8 @@
 		CFD4CB7B2812DF4A00D746B2 /* soineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD4CB7F2812DF4A00D746B2 /* soineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soineUITests.swift; sourceTree = "<group>"; };
 		CFD4CB812812DF4A00D746B2 /* soineUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soineUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CFDBCE26281ECDCC00445950 /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFDBCE27281ECDCC00445950 /* SoineData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,8 +152,8 @@
 		CFD4CB4F2812DF4000D746B2 = {
 			isa = PBXGroup;
 			children = (
-				CF052DB8281BD36800C54EEF /* SoineData+CoreDataClass.swift */,
-				CF052DB7281BD36800C54EEF /* SoineData+CoreDataProperties.swift */,
+				CFDBCE27281ECDCC00445950 /* SoineData+CoreDataClass.swift */,
+				CFDBCE26281ECDCC00445950 /* SoineData+CoreDataProperties.swift */,
 				CFD4CB5A2812DF4000D746B2 /* soine */,
 				CFD4CB742812DF4A00D746B2 /* soineTests */,
 				CFD4CB7E2812DF4A00D746B2 /* soineUITests */,
@@ -419,11 +419,11 @@
 				CF8F3D4328144A5000A47CF5 /* Extentions.swift in Sources */,
 				CFD4CB662812DF4000D746B2 /* soine.xcdatamodeld in Sources */,
 				CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */,
+				CFDBCE29281ECDCC00445950 /* SoineData+CoreDataClass.swift in Sources */,
 				CFD4CB602812DF4000D746B2 /* ViewController.swift in Sources */,
 				CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */,
 				CFD4CB5C2812DF4000D746B2 /* AppDelegate.swift in Sources */,
-				CF052DB9281BD36800C54EEF /* SoineData+CoreDataProperties.swift in Sources */,
-				CF052DBA281BD36800C54EEF /* SoineData+CoreDataClass.swift in Sources */,
+				CFDBCE28281ECDCC00445950 /* SoineData+CoreDataProperties.swift in Sources */,
 				CF4DA6C02813C7040084B7E5 /* Consts.swift in Sources */,
 				CFD4CB5E2812DF4000D746B2 /* SceneDelegate.swift in Sources */,
 				CF4DA6C22813D7870084B7E5 /* SoineViewController.swift in Sources */,
