@@ -16,14 +16,16 @@ class SoineViewController: UIViewController {
     var viewContext:NSManagedObjectContext!
     var audioPlayer:AVAudioPlayer!
     var targetId:Int16 = 0
+    var voiceFilePath:URL?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("-------------- SoineViewController viewDidLoad --------------")
+        //アプリがバックグラウンドになった時に呼ばれるメソッドを設定
+        NotificationCenter.default.addObserver(self, selector: #selector(SoineViewController.didEnterBackgroundNotification(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         var image:UIImage? = nil
         var scale:CGFloat = CGFloat(1)
-        var voiceFilePath:URL?
         
 
         var appDelegate:AppDelegate!
@@ -85,6 +87,18 @@ class SoineViewController: UIViewController {
 //        appDelegate = UIApplication.shared.delegate as? AppDelegate
 //        viewContext = appDelegate.persistentContainer.viewContext
 //        Utilities.setBackground_init(playerView: &imageView, _id: Consts.IMAGE_ID_SOINE,toSoine: true)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("ViewController viewWillDisappear")
+        CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
+        
+    }
+    
+    @objc func didEnterBackgroundNotification(_ notification: NSNotification?) {
+        print("ViewController didEnterBackgroundNotification")
+        CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
+        dismiss(animated: true)
     }
 }
 ///////////////////////////
