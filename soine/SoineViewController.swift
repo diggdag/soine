@@ -15,6 +15,8 @@ class SoineViewController: UIViewController {
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
     var audioPlayer:AVAudioPlayer!
+    var targetId:Int16 = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ class SoineViewController: UIViewController {
                 for result: AnyObject in fetchResults {
                     let id: Int16 = result.value(forKey: "id") as! Int16
 
-                    if Consts.IMAGE_ID_SOINE == id {
+                    if targetId == id {
                         image = UIImage(data: result.value(forKey: "picture") as! Data)
                         scale = result.value(forKey: "scale") as! CGFloat
                         voice = result.value(forKey: "voice") as? Data

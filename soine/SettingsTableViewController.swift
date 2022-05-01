@@ -18,6 +18,7 @@ class SettingsTableViewController: UITableViewController{
     @IBOutlet weak var bg: UIView!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var voiceLabel: UILabel!
+    var targetId:Int16? = nil
     
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
@@ -38,7 +39,7 @@ class SettingsTableViewController: UITableViewController{
                 for result: AnyObject in fetchResults {
                     let id: Int16 = result.value(forKey: "id") as! Int16
 
-                    if Consts.IMAGE_ID_SOINE == id {
+                    if targetId == id {
                         image = UIImage(data: result.value(forKey: "picture") as! Data)
                         scale = result.value(forKey: "scale") as! CGFloat
                         voiceName = result.value(forKey: "voiceName") as? String
@@ -162,6 +163,33 @@ class SettingsTableViewController: UITableViewController{
             self.present(alert, animated: true, completion: nil)
         }
     }
+    func getMaxId() -> Int16? {
+        var max_id:Int16?
+        do{
+            let request_max: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+            request_max.fetchLimit = 1
+            let sortDescriptor = NSSortDescriptor(key: "id", ascending: false)
+            let sortDescriptors = [sortDescriptor]
+            request_max.sortDescriptors = sortDescriptors
+            let fetchResults = try viewContext.fetch(request_max)
+            if fetchResults.count != 0 {
+                max_id = fetchResults[0].id
+            }
+        } catch let e as NSError{
+            print("error !!! : \(e)")
+        }
+        return max_id
+    }
+    func getNextId() -> Int16 {
+        var max_id = getMaxId()
+        if max_id == nil {
+            max_id = 0
+        }
+        else{
+            max_id = max_id! + 1
+        }
+        return max_id!
+    }
 }
 
 ///////////////////////////
@@ -174,42 +202,34 @@ class SettingsTableViewController: UITableViewController{
 extension SettingsTableViewController:UIDocumentPickerDelegate{
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         if (CFURLStartAccessingSecurityScopedResource(url as CFURL)) {
-            
-
             print(url) // ここにURLが入っている
             let fileName = url.lastPathComponent
             let fileExtention = url.pathExtension
-    //        let audioPath = Bundle.main.path(forResource: url.path, ofType:"wav")!
-    //        let audioUrl = URL(fileURLWithPath: audioPath)
-    //        let audioUrl = URL(string: url.path)!
-    //        let audioUrl = URL(fileURLWithPath: url.path)
-            
             
             do {
                 print("canOpenURL : \(UIApplication.shared.canOpenURL(url))")
                 print("extention : \(fileExtention)")
                 // AVAudioPlayerのインスタンス化
-    //            let audioPlayer = try AVAudioPlayer(contentsOf: url,fileTypeHint: url.pathExtension)
-                
-    //            let fileData = try Data(NSURL(string: url.path))
                 let fileData = try Data(contentsOf: url)
-    //            UIApplication.OpenExternalURLOptionsKey
-                
                 
                 print("Data : \(fileData)")
                 
                 let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-                var predicate:NSPredicate
-                predicate = NSPredicate(format: "id = \(Consts.IMAGE_ID_SOINE)")
-                request.predicate = predicate
+//                var predicate:NSPredicate
+//                predicate =
+                if targetId != nil {
+//                    request.predicate = NSPredicate(format: "id = \(targetId)")
+                    request.predicate = NSPredicate(format: "id = %d", targetId!)
+                }
+                
                 var change = false
                 //change
                 let fetchResults = try viewContext.fetch(request)
-                if(fetchResults.count != 0){
+                if(fetchResults.count != 0 && targetId != nil){
                     change = true
                     for result: AnyObject in fetchResults {
                         let record = result as! NSManagedObject
-                        record.setValue(Consts.IMAGE_ID_SOINE, forKey: "id")
+                        record.setValue(targetId, forKey: "id")
                         record.setValue(fileName, forKey: "voiceName")
                         record.setValue(fileExtention, forKey: "voiceFileExtention")
                         record.setValue(fileData, forKey: "voice")
@@ -218,13 +238,16 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
                 }
                 //add
                 if !change {
+                    var next_id = getNextId()
+                    
                     let background = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
                     let newRecord = NSManagedObject(entity: background!, insertInto: viewContext)
-                    newRecord.setValue(Consts.IMAGE_ID_SOINE, forKey: "id")
+                    newRecord.setValue(next_id, forKey: "id")
                     newRecord.setValue(fileName, forKey: "voiceName")
                     newRecord.setValue(fileExtention, forKey: "voiceFileExtention")
                     newRecord.setValue(fileData, forKey: "voice")
                     appDelegate.saveContext()
+                    targetId = next_id
                 }
     //            let audioPlayer = try AVAudioPlayer(contentsOf: url)//要らん処理
             } catch let e as NSError{
@@ -256,7 +279,7 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
         if let _image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
             let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-            var predicate:NSPredicate
+//            var predicate:NSPredicate
             // スクリーンの縦横サイズを取得
             let playerViewWidth:CGFloat = bg.frame.size.width
 //            print("playerViewWidth : \(playerViewWidth) , playerViewHeight : \(bg.frame.size.height)")
@@ -276,8 +299,12 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
             
             let scale:CGFloat = playerViewWidth / imgWidth
             
-            predicate = NSPredicate(format: "id = \(Consts.IMAGE_ID_SOINE)")
-            request.predicate = predicate
+//            predicate =
+            if targetId != nil {
+//                request.predicate = NSPredicate(format: "id = \(targetId)")
+                request.predicate = NSPredicate(format: "id = %d", targetId!)
+            }
+            
             
             var change = false
             
@@ -289,11 +316,11 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
             //change
             do {
                 let fetchResults = try viewContext.fetch(request)
-                if(fetchResults.count != 0){
+                if(fetchResults.count != 0 && targetId != nil){
                     change=true
                     for result: AnyObject in fetchResults {
                         let record = result as! NSManagedObject
-                        record.setValue(Consts.IMAGE_ID_SOINE, forKey: "id")
+                        record.setValue(targetId, forKey: "id")
                         record.setValue(imageData, forKey: "picture")
 //                        record.setValue(image.pngData(), forKey: "picture")
                         record.setValue(scale, forKey: "scale")
@@ -304,12 +331,14 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
             }
             //add
             if !change {
+                let next_id = getNextId()
                 let background = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
                 let newRecord = NSManagedObject(entity: background!, insertInto: viewContext)
-                newRecord.setValue(Consts.IMAGE_ID_SOINE, forKey: "id")
+                newRecord.setValue(next_id, forKey: "id")
                 newRecord.setValue(imageData, forKey: "picture")
                 newRecord.setValue(scale, forKey: "scale")
                 appDelegate.saveContext()
+                targetId = next_id
             }
             
             //背景設定

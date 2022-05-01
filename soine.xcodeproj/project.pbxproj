@@ -11,6 +11,7 @@
 		4E2B583453DE95A491EAAF8C /* Pods_soine_soineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7FE51060977A5E0C9FBAFE /* Pods_soine_soineUITests.framework */; };
 		CF052DB9281BD36800C54EEF /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF052DB7281BD36800C54EEF /* SoineData+CoreDataProperties.swift */; };
 		CF052DBA281BD36800C54EEF /* SoineData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF052DB8281BD36800C54EEF /* SoineData+CoreDataClass.swift */; };
+		CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */; };
 		CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4DA6AF2812EA580084B7E5 /* SettingsTableViewController.swift */; };
 		CF4DA6B72812FC6C0084B7E5 /* Pods_soine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5D8506BB64AC045F4F4074 /* Pods_soine.framework */; };
 		CF4DA6BA2813B3600084B7E5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4DA6B92813B3600084B7E5 /* Utilities.swift */; };
@@ -71,6 +72,7 @@
 		CE65AD748C9251F6F308D146 /* Pods-soineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soineTests.debug.xcconfig"; path = "Target Support Files/Pods-soineTests/Pods-soineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF052DB7281BD36800C54EEF /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CF052DB8281BD36800C54EEF /* SoineData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell_list.swift; sourceTree = "<group>"; };
 		CF4DA6AF2812EA580084B7E5 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		CF4DA6B12812FA8E0084B7E5 /* ImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4DA6B32812FC610084B7E5 /* ImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +179,7 @@
 				CFD4CB5F2812DF4000D746B2 /* ViewController.swift */,
 				CF4DA6AF2812EA580084B7E5 /* SettingsTableViewController.swift */,
 				CF4DA6C12813D7870084B7E5 /* SoineViewController.swift */,
+				CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */,
 				CFD4CB5B2812DF4000D746B2 /* AppDelegate.swift */,
 				CFD4CB5D2812DF4000D746B2 /* SceneDelegate.swift */,
 				CF4DA6B92813B3600084B7E5 /* Utilities.swift */,
@@ -417,6 +420,7 @@
 				CFD4CB662812DF4000D746B2 /* soine.xcdatamodeld in Sources */,
 				CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */,
 				CFD4CB602812DF4000D746B2 /* ViewController.swift in Sources */,
+				CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */,
 				CFD4CB5C2812DF4000D746B2 /* AppDelegate.swift in Sources */,
 				CF052DB9281BD36800C54EEF /* SoineData+CoreDataProperties.swift in Sources */,
 				CF052DBA281BD36800C54EEF /* SoineData+CoreDataClass.swift in Sources */,
