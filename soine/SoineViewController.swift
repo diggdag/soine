@@ -44,7 +44,8 @@ class SoineViewController: UIViewController {
                     if targetId == id {
                         image = UIImage(data: result.value(forKey: "picture") as! Data)
                         scale = result.value(forKey: "scale") as! CGFloat
-                        voice = result.value(forKey: "voice") as? Data
+                        let voiceData = result.value(forKey: "voiceData") as? VoiceData
+                        voice = voiceData?.fileData
 //                        voiceName = result.value(forKey: "voiceName") as? String
                         voiceFileExtention = result.value(forKey: "voiceFileExtention") as? String
                     }
@@ -66,16 +67,11 @@ class SoineViewController: UIViewController {
         } catch  let e as NSError{
             print("error !!! : \(e)")
         }
-        
-//        appDelegate = UIApplication.shared.delegate as? AppDelegate
-//        viewContext = appDelegate.persistentContainer.viewContext
-//        Utilities.setBackground_init(playerView: &imageView, _id: Consts.IMAGE_ID_SOINE,toSoine: true)
     }
 }
 ///////////////////////////
 ///extentions
-//////////////////////
-///
+/////////////////////////
 extension SoineViewController: AVAudioPlayerDelegate{
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool){
         print("call audioPlayerDidFinishPlaying !!!")

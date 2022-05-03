@@ -4,11 +4,17 @@
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="picture" optional="YES" attributeType="Binary"/>
         <attribute name="scale" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="voice" optional="YES" attributeType="Binary"/>
         <attribute name="voiceFileExtention" optional="YES" attributeType="String"/>
         <attribute name="voiceName" optional="YES" attributeType="String"/>
+        <relationship name="voiceData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="VoiceData" inverseName="soineData" inverseEntity="VoiceData"/>
+    </entity>
+    <entity name="VoiceData" representedClassName="VoiceData" syncable="YES">
+        <attribute name="fileData" optional="YES" attributeType="Binary"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="soineData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SoineData" inverseName="voiceData" inverseEntity="SoineData"/>
     </entity>
     <elements>
         <element name="SoineData" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="VoiceData" positionX="-63" positionY="27" width="128" height="74"/>
     </elements>
 </model>

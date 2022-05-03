@@ -31,32 +31,30 @@ class SettingsTableViewController: UITableViewController{
         var image:UIImage? = nil
         var scale:CGFloat = CGFloat(1)
         var voiceName: String?
-        let query: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+        let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
 
-        do {
-            let fetchResults = try viewContext.fetch(query)
-            if fetchResults.count != 0 {
-                for result: AnyObject in fetchResults {
-                    let id: Int16 = result.value(forKey: "id") as! Int16
-
-                    if targetId == id {
-                        image = UIImage(data: result.value(forKey: "picture") as! Data)
+        if targetId != nil {
+            request.predicate = NSPredicate(format: "id = %d", targetId!)
+        
+            do {
+                let fetchResults = try viewContext.fetch(request)
+                if fetchResults.count != 0 {
+                    for result: AnyObject in fetchResults {
+                        var picture = result.value(forKey: "picture")
+                        image = picture == nil ? UIImage() : UIImage(data: picture as! Data)
                         scale = result.value(forKey: "scale") as! CGFloat
                         voiceName = result.value(forKey: "voiceName") as? String
                     }
                 }
+            } catch  let e as NSError{
+                print("error !!! : \(e)")
             }
-            
-        } catch  let e as NSError{
-            print("error !!! : \(e)")
+            //画像をセットする
+            Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale,initial: true)
+            if voiceName != nil {
+                voiceLabel.text = voiceName
+            }
         }
-        //画像をセットする
-        Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale,initial: true)
-        if voiceName != nil {
-            voiceLabel.text = voiceName
-        }
-        
-//        Utilities.setBackground_init(playerView: &bg, _id: 0)
         // アプリのバージョン
         if let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
             versionLabel.text = version
@@ -124,13 +122,6 @@ class SettingsTableViewController: UITableViewController{
             }
             self.present(picker, animated: true, completion: nil)
         }
-    }
-    
-    func callSoundLibrary() {
-        let pickerController = MPMediaPickerController(mediaTypes: .music)
-        pickerController.prompt = "Select Song"
-        pickerController.delegate = self
-        present(pickerController, animated: true)
     }
     // 写真へのアクセスがOFFのときに使うメソッド
     func requestAuthorizationOn(){
@@ -222,17 +213,24 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
                     request.predicate = NSPredicate(format: "id = %d", targetId!)
                 }
                 
+                //create voice data
+                let entity_voice = NSEntityDescription.entity(forEntityName: "VoiceData", in: viewContext)
+                let record_voice = NSManagedObject(entity: entity_voice!, insertInto: viewContext) as! VoiceData
+//                record_voice.id = targetId!
+                record_voice.fileData = fileData
+                
                 var change = false
                 //change
                 let fetchResults = try viewContext.fetch(request)
                 if(fetchResults.count != 0 && targetId != nil){
                     change = true
                     for result: AnyObject in fetchResults {
-                        let record = result as! NSManagedObject
-                        record.setValue(targetId, forKey: "id")
-                        record.setValue(fileName, forKey: "voiceName")
-                        record.setValue(fileExtention, forKey: "voiceFileExtention")
-                        record.setValue(fileData, forKey: "voice")
+                        let record = result as! SoineData
+                        record.id = targetId!
+                        record.voiceName = fileName
+                        record.voiceFileExtention = fileExtention
+                        record_voice.id = targetId!
+                        record.voiceData = record_voice
                     }
                     try viewContext.save()
                 }
@@ -240,16 +238,17 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
                 if !change {
                     var next_id = getNextId()
                     
-                    let background = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
-                    let newRecord = NSManagedObject(entity: background!, insertInto: viewContext)
-                    newRecord.setValue(next_id, forKey: "id")
-                    newRecord.setValue(fileName, forKey: "voiceName")
-                    newRecord.setValue(fileExtention, forKey: "voiceFileExtention")
-                    newRecord.setValue(fileData, forKey: "voice")
+                    let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
+                    let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
+                    record.id = next_id
+                    record.voiceName = fileName
+                    record.voiceFileExtention = fileExtention
+                    record_voice.id = next_id
+                    record.voiceData = record_voice
+                    
                     appDelegate.saveContext()
                     targetId = next_id
                 }
-    //            let audioPlayer = try AVAudioPlayer(contentsOf: url)//要らん処理
             } catch let e as NSError{
                 print("error !!! : \(e)")
             }
@@ -258,18 +257,6 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
         }
         else {
             print("Permission error!")
-        }
-    }
-}
-extension SettingsTableViewController:MPMediaPickerControllerDelegate{
-    
-    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        let theChosenSong = mediaItemCollection.items[0]
-        let songTitle = theChosenSong.value(forProperty: MPMediaItemPropertyTitle) as? String
-        let assetURL = theChosenSong.value(forProperty: MPMediaItemPropertyAssetURL) as? URL
-        var songAsset: AVURLAsset? = nil
-        if let assetURL = assetURL {
-            songAsset = AVURLAsset(url: assetURL, options: nil)
         }
     }
 }
@@ -319,11 +306,10 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
                 if(fetchResults.count != 0 && targetId != nil){
                     change=true
                     for result: AnyObject in fetchResults {
-                        let record = result as! NSManagedObject
-                        record.setValue(targetId, forKey: "id")
-                        record.setValue(imageData, forKey: "picture")
-//                        record.setValue(image.pngData(), forKey: "picture")
-                        record.setValue(scale, forKey: "scale")
+                        let record = result as! SoineData
+                        record.id = targetId!
+                        record.picture = imageData
+                        record.scale = Float(scale)
                     }
                     try viewContext.save()
                 }
@@ -332,11 +318,11 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
             //add
             if !change {
                 let next_id = getNextId()
-                let background = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
-                let newRecord = NSManagedObject(entity: background!, insertInto: viewContext)
-                newRecord.setValue(next_id, forKey: "id")
-                newRecord.setValue(imageData, forKey: "picture")
-                newRecord.setValue(scale, forKey: "scale")
+                let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
+                let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
+                record.id = next_id
+                record.picture = imageData
+                record.scale = Float(scale)
                 appDelegate.saveContext()
                 targetId = next_id
             }

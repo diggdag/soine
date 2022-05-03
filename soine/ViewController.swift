@@ -80,6 +80,9 @@ class ViewController: UIViewController {
     }
     
 }
+///////////////////////////
+///extentions
+/////////////////////////
 extension ViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datas.count
@@ -87,12 +90,12 @@ extension ViewController:UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let account: SoineData = datas[indexPath.row]
+        let soineData: SoineData = datas[indexPath.row]
 
         let cell: TableViewCell_list = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list") as! TableViewCell_list
     
-        let image:UIImage = UIImage(data: account.picture!)!
-        let voiceName: String = account.voiceName == nil ? "" : account.voiceName!
+        let image:UIImage = soineData.picture == nil ? UIImage() : UIImage(data: soineData.picture!)!
+        let voiceName: String = soineData.voiceName == nil ? "" : soineData.voiceName!
         
             
         cell.setCell(data: Data_list(
