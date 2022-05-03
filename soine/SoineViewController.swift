@@ -24,6 +24,7 @@ class SoineViewController: UIViewController {
         print("-------------- SoineViewController viewDidLoad --------------")
         //アプリがバックグラウンドになった時に呼ばれるメソッドを設定
         NotificationCenter.default.addObserver(self, selector: #selector(SoineViewController.didEnterBackgroundNotification(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SoineViewController.willTerminateNotification(_:)), name: UIApplication.willTerminateNotification, object: nil)
         var image:UIImage? = nil
         var scale:CGFloat = CGFloat(1)
         
@@ -57,24 +58,26 @@ class SoineViewController: UIViewController {
             
             //ここからボイス
             if voiceFilePath != nil {
-                if (CFURLStartAccessingSecurityScopedResource(voiceFilePath! as CFURL)) {
-                
-                    let fileName = voiceFilePath!.lastPathComponent
+                if voiceFilePath!.startAccessingSecurityScopedResource() {
+//                    let fileName = voiceFilePath!.lastPathComponent
                     let fileExtention = voiceFilePath!.pathExtension
-                    let fileData = try Data(contentsOf: voiceFilePath!)
-                    
-                    
-                    print("Data : \(fileData)")
-                    audioPlayer = try AVAudioPlayer(data: fileData,fileTypeHint: fileExtention)
+                    Task{
+                        let fileData = try await self.read()
+                        print("Data : \(fileData)")
+                        audioPlayer = try AVAudioPlayer(data: fileData,fileTypeHint: fileExtention)
 
-                    // AVAudioPlayerのデリゲートをセット
-                    audioPlayer.delegate = self
+                        // AVAudioPlayerのデリゲートをセット
+                        audioPlayer.delegate = self
 
-                    // 音声の再生
-                    audioPlayer.prepareToPlay()
-                    audioPlayer.play()
-                    CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
+                        // 音声の再生
+                        audioPlayer.prepareToPlay()
+                        audioPlayer.play()
+                    }
+//                    let fileData = try Data(contentsOf: voiceFilePath!)
                 }
+//                if (CFURLStartAccessingSecurityScopedResource(voiceFilePath! as CFURL)) {
+//                    CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
+//                }
                 else {
                     print("Permission error!")
                 }
@@ -88,17 +91,27 @@ class SoineViewController: UIViewController {
 //        viewContext = appDelegate.persistentContainer.viewContext
 //        Utilities.setBackground_init(playerView: &imageView, _id: Consts.IMAGE_ID_SOINE,toSoine: true)
     }
+    func read() async throws -> Data {
+        let url = try await NSFileCoordinator().coordinate(readingItemAt: self.voiceFilePath!)
+            return try Data(contentsOf: url)
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("ViewController viewWillDisappear")
-        CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
-        
+//        CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
+//        voiceFilePath?.stopAccessingSecurityScopedResource()
     }
     
     @objc func didEnterBackgroundNotification(_ notification: NSNotification?) {
         print("ViewController didEnterBackgroundNotification")
-        CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
-        dismiss(animated: true)
+//        CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
+//        dismiss(animated: true)
+    }
+    @objc func willTerminateNotification(_ notification: NSNotification?) {
+        print("ViewController willTerminateNotification")
+//        CFURLStopAccessingSecurityScopedResource(voiceFilePath! as CFURL)
+//        voiceFilePath?.stopAccessingSecurityScopedResource()
+//        dismiss(animated: true)
     }
 }
 ///////////////////////////
