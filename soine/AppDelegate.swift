@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import AVFAudio
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        /// AVAudioSessionCategory設定
+        let session = AVAudioSession.sharedInstance()
+        do {
+            // CategoryをPlaybackにする
+            try session.setCategory(.playback, mode: .default)
+        } catch  {
+            // 予期しない場合
+            fatalError("Category設定失敗")
+        }
+
+        // session有効化
+        do {
+            try session.setActive(true)
+        } catch {
+            // 予期しない場合
+            fatalError("Session有効化失敗")
+        }
+
         return true
     }
 
