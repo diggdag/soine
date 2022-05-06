@@ -80,25 +80,13 @@ class Utilities {
         
         var image = _image
         
-//        if imgWidth > imgHeight {
-//            print("!!! width > height !!!")
-//            image = UIImage(cgImage: _image.cgImage!, scale: _image.scale, orientation: .up)
-//            print("fixed -> orientation : \(image.imageOrientation.rawValue) , width : \(image.size.width) , height : \(image.size.height)")
-//        }
-//        let image = self.fixOrientation(img: _image)
-//        print("image orientation after : \(image.imageOrientation.rawValue)")
-        
         let imageView = UIImageView(image:image)
 //        imageView.alpha = 0.6
         
         // 画像サイズをスクリーン幅に合わせる
         let rect:CGRect =
             CGRect(x:0, y:0, width:imgWidth * scale, height:imgHeight * scale)
-//        let rect:CGRect =
-//            CGRect(x:0, y:0, width:playerView.frame.size.width, height:playerView.frame.size.height)
-        
         imageView.frame = rect;
-        
         // UIImageViewのインスタンスをビューに追加
         imageView.tag = 100
         

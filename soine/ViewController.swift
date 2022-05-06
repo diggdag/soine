@@ -99,7 +99,7 @@ extension ViewController:UITableViewDataSource{
         
             
         cell.setCell(data: Data_list(
-            voiceName: voiceName, category: image))
+            voiceName: voiceName, category: image, scale: CGFloat(soineData.scale)))
     
         cell.backgroundColor = UIColor.clear
         cell.contentView.backgroundColor = UIColor.clear
