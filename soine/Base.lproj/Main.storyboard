@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="Ytw-Up-B0k" customClass="SoineViewController" customModule="soine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S3m-U6-EHa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsL-un-fR9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -80,32 +80,42 @@
                                                         <constraint firstAttribute="height" constant="148" id="Str-PA-0FT"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adr-Jd-EpS">
-                                                    <rect key="frame" x="5" y="63.5" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxT-9n-MhJ">
                                                     <rect key="frame" x="357.5" y="58.5" width="51.5" height="31"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="bed.double.fill" catalog="system"/>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LRK-Ds-Mk7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="148"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="130" id="JcG-Lx-grE"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adr-Jd-EpS">
+                                                    <rect key="frame" x="130" y="63.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="adr-Jd-EpS" firstAttribute="leading" secondItem="LRK-Ds-Mk7" secondAttribute="trailing" id="0A3-CH-uhD"/>
                                                 <constraint firstItem="x7X-GW-1Wt" firstAttribute="leading" secondItem="REG-Ob-e3a" secondAttribute="leading" id="0Xd-Hd-GvN"/>
                                                 <constraint firstItem="adr-Jd-EpS" firstAttribute="centerY" secondItem="REG-Ob-e3a" secondAttribute="centerY" id="Isv-Fv-BRZ"/>
+                                                <constraint firstItem="LRK-Ds-Mk7" firstAttribute="top" secondItem="REG-Ob-e3a" secondAttribute="top" id="RQT-jY-EQL"/>
                                                 <constraint firstItem="x7X-GW-1Wt" firstAttribute="top" secondItem="REG-Ob-e3a" secondAttribute="top" id="RZk-Gs-78R"/>
+                                                <constraint firstItem="LRK-Ds-Mk7" firstAttribute="leading" secondItem="REG-Ob-e3a" secondAttribute="leading" id="blz-AG-OdE"/>
                                                 <constraint firstItem="x7X-GW-1Wt" firstAttribute="centerY" secondItem="REG-Ob-e3a" secondAttribute="centerY" id="fwj-Wj-Y98"/>
                                                 <constraint firstAttribute="trailing" secondItem="x7X-GW-1Wt" secondAttribute="trailing" id="gFD-71-whq"/>
                                                 <constraint firstItem="wxT-9n-MhJ" firstAttribute="centerY" secondItem="REG-Ob-e3a" secondAttribute="centerY" id="m4L-OZ-Qi2"/>
+                                                <constraint firstAttribute="bottom" secondItem="LRK-Ds-Mk7" secondAttribute="bottom" id="mLy-Tk-0Wj"/>
                                                 <constraint firstAttribute="trailing" secondItem="wxT-9n-MhJ" secondAttribute="trailing" constant="5" id="pg9-EB-AfV"/>
-                                                <constraint firstItem="adr-Jd-EpS" firstAttribute="leading" secondItem="REG-Ob-e3a" secondAttribute="leading" constant="5" id="vSC-fD-3FR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="btn" destination="wxT-9n-MhJ" id="4Uw-S2-Uyf"/>
                                             <outlet property="soineImg" destination="x7X-GW-1Wt" id="Axl-F6-qum"/>
+                                            <outlet property="soineImg2" destination="LRK-Ds-Mk7" id="Hbl-wV-egf"/>
                                             <outlet property="voiceName" destination="adr-Jd-EpS" id="ZX2-6Y-lPD"/>
                                         </connections>
                                     </tableViewCell>
@@ -136,7 +146,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="nS4-Z0-IxZ" id="vgv-cJ-eJx"/>
-                        <segue destination="Ytw-Up-B0k" kind="presentation" identifier="toSoine" modalTransitionStyle="coverVertical" id="KYU-jj-xtJ"/>
+                        <segue destination="Ytw-Up-B0k" kind="show" identifier="toSoine" id="KYU-jj-xtJ"/>
                         <segue destination="nxn-xV-yZZ" kind="show" identifier="toSetting" id="qtQ-C8-DPS"/>
                     </connections>
                 </viewController>

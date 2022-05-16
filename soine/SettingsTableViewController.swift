@@ -40,7 +40,7 @@ class SettingsTableViewController: UITableViewController{
                 let fetchResults = try viewContext.fetch(request)
                 if fetchResults.count != 0 {
                     for result: AnyObject in fetchResults {
-                        var picture = result.value(forKey: "picture")
+                        let picture = result.value(forKey: "picture")
                         image = picture == nil ? UIImage() : UIImage(data: picture as! Data)
                         scale = result.value(forKey: "scale") as! CGFloat
                         voiceName = result.value(forKey: "voiceName") as? String
@@ -50,7 +50,7 @@ class SettingsTableViewController: UITableViewController{
                 print("error !!! : \(e)")
             }
             //画像をセットする
-            Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale,initial: true)
+            Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale)
             if voiceName != nil {
                 voiceLabel.text = voiceName
             }
@@ -269,13 +269,14 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
 //            var predicate:NSPredicate
             // スクリーンの縦横サイズを取得
             let playerViewWidth:CGFloat = bg.frame.size.width
+            print("frame width : \(playerViewWidth)")
 //            print("playerViewWidth : \(playerViewWidth) , playerViewHeight : \(bg.frame.size.height)")
             
             // 画像の縦横サイズを取得
             let imgWidth:CGFloat = _image.size.width
             let imgHeight:CGFloat = _image.size.height
 //            print("imgWidth : \(imgWidth)")
-            print("orientation : \(_image.imageOrientation.rawValue) , width : \(_image.size.width) , height : \(_image.size.height)")
+            print("image orientation : \(_image.imageOrientation.rawValue) , width : \(imgWidth) , height : \(imgHeight)")
             
             var image = _image
             //向き補正
@@ -285,6 +286,7 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
 //            }
             
             let scale:CGFloat = playerViewWidth / imgWidth
+            print("register scale : \(scale)")
             
 //            predicate =
             if targetId != nil {

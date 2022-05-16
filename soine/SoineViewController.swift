@@ -33,27 +33,24 @@ class SoineViewController: UIViewController {
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         viewContext = appDelegate.persistentContainer.viewContext
 
-        let query: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+        let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %d", targetId)
 
         do {
-            let fetchResults = try viewContext.fetch(query)
+            let fetchResults = try viewContext.fetch(request)
             if fetchResults.count != 0 {
                 for result: AnyObject in fetchResults {
-                    let id: Int16 = result.value(forKey: "id") as! Int16
-
-                    if targetId == id {
-                        image = UIImage(data: result.value(forKey: "picture") as! Data)
-                        scale = result.value(forKey: "scale") as! CGFloat
-                        let voiceData = result.value(forKey: "voiceData") as? VoiceData
-                        voice = voiceData?.fileData
+                    image = UIImage(data: result.value(forKey: "picture") as! Data)
+                    scale = result.value(forKey: "scale") as! CGFloat
+                    let voiceData = result.value(forKey: "voiceData") as? VoiceData
+                    voice = voiceData?.fileData
 //                        voiceName = result.value(forKey: "voiceName") as? String
-                        voiceFileExtention = result.value(forKey: "voiceFileExtention") as? String
-                    }
+                    voiceFileExtention = result.value(forKey: "voiceFileExtention") as? String
                 }
             }
             
             //画像をセットする
-            Utilities.settingBackground(playerView: &imageView, _image: image ?? UIImage(),scale: scale,initial: true)
+            Utilities.settingBackground(playerView: &imageView, _image: image ?? UIImage(),scale: scale)
             
             //ここからボイス
             audioPlayer = try AVAudioPlayer(data: voice!,fileTypeHint: voiceFileExtention)
@@ -68,6 +65,9 @@ class SoineViewController: UIViewController {
             print("error !!! : \(e)")
         }
     }
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    }
 }
 ///////////////////////////
 ///extentions

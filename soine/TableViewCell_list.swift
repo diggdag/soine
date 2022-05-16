@@ -8,6 +8,7 @@
 import UIKit
 class TableViewCell_list: UITableViewCell {
     @IBOutlet weak var soineImg: UIImageView!
+    @IBOutlet weak var soineImg2: UIImageView!
     @IBOutlet weak var voiceName: UILabel!
     @IBOutlet weak var btn: UIButton!
     func setCell(data: Data_list) {
@@ -22,14 +23,18 @@ class TableViewCell_list: UITableViewCell {
     
         let rect:CGRect = CGRect(x:0, y:-(height/4), width:width, height:height)
         let myImageView = UIImageView(image:data.soineImg)
+        
         myImageView.frame = rect;
                 
-        myImageView.alpha = 0.6
+        myImageView.alpha = 0.3
         
+        //背景画像
         for subView in soineImg.subviews{
             subView.removeFromSuperview()
         }
         soineImg.addSubview(myImageView)
+        
+        soineImg2.image = data.soineImg
     }
 }
 
