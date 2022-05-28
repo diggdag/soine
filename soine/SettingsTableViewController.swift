@@ -315,7 +315,8 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
                     }
                     try viewContext.save()
                 }
-            } catch {
+            } catch let e as NSError{
+                print("error !!! : \(e)")
             }
             //add
             if !change {
