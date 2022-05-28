@@ -67,32 +67,32 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCell_list" rowHeight="148" id="P2w-Qx-OjQ" customClass="TableViewCell_list" customModule="soine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="148"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCell_list" rowHeight="86" id="P2w-Qx-OjQ" customClass="TableViewCell_list" customModule="soine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P2w-Qx-OjQ" id="REG-Ob-e3a">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="148"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x7X-GW-1Wt">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="148"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="86"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="148" id="Str-PA-0FT"/>
+                                                        <constraint firstAttribute="height" constant="100" id="Str-PA-0FT"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxT-9n-MhJ">
-                                                    <rect key="frame" x="369" y="58.5" width="40" height="31"/>
+                                                    <rect key="frame" x="369" y="27.5" width="40" height="31"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="music.note" catalog="system"/>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LRK-Ds-Mk7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="148"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="86"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="JcG-Lx-grE"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adr-Jd-EpS">
-                                                    <rect key="frame" x="130" y="63.5" width="42" height="21"/>
+                                                    <rect key="frame" x="130" y="32.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
