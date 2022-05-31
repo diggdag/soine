@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CategoryData" representedClassName="CategoryData" syncable="YES">
+        <attribute name="categoryId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="soineData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoineData" inverseName="categoryData" inverseEntity="SoineData"/>
+    </entity>
     <entity name="SoineData" representedClassName="SoineData" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="picture" optional="YES" attributeType="Binary"/>
         <attribute name="scale" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="voiceFileExtention" optional="YES" attributeType="String"/>
         <attribute name="voiceName" optional="YES" attributeType="String"/>
+        <relationship name="categoryData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryData" inverseName="soineData" inverseEntity="CategoryData"/>
         <relationship name="voiceData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="VoiceData" inverseName="soineData" inverseEntity="VoiceData"/>
     </entity>
     <entity name="VoiceData" representedClassName="VoiceData" syncable="YES">
@@ -14,7 +20,8 @@
         <relationship name="soineData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SoineData" inverseName="voiceData" inverseEntity="SoineData"/>
     </entity>
     <elements>
-        <element name="SoineData" positionX="-63" positionY="-18" width="128" height="119"/>
-        <element name="VoiceData" positionX="-63" positionY="27" width="128" height="74"/>
+        <element name="CategoryData" positionX="148.865966796875" positionY="13.19845581054688" width="128" height="88"/>
+        <element name="SoineData" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="VoiceData" positionX="6.94000244140625" positionY="170.4522399902344" width="128" height="88"/>
     </elements>
 </model>

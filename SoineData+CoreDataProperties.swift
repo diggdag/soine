@@ -2,7 +2,7 @@
 //  SoineData+CoreDataProperties.swift
 //  
 //
-//  Created by 倉知諒 on 2022/05/03.
+//  Created by 倉知諒 on 2022/05/31.
 //
 //
 
@@ -21,6 +21,7 @@ extension SoineData {
     @NSManaged public var scale: Float
     @NSManaged public var voiceFileExtention: String?
     @NSManaged public var voiceName: String?
+    @NSManaged public var categoryData: CategoryData?
     @NSManaged public var voiceData: VoiceData?
 
 }

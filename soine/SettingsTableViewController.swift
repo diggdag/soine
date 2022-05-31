@@ -14,20 +14,28 @@ import UniformTypeIdentifiers
 import AVFoundation
 
 class SettingsTableViewController: UITableViewController{
+    var categories:[CategoryData] = []
 
     @IBOutlet weak var bg: UIView!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var voiceLabel: UILabel!
+    @IBOutlet weak var pickerView: UIPickerView!
     var targetId:Int16? = nil
     
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
+    var categoryId:Int16? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
       
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         viewContext = appDelegate.persistentContainer.viewContext
+        pickerView.dataSource = self
+        pickerView.delegate = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         var image:UIImage? = nil
         var scale:CGFloat = CGFloat(1)
         var voiceName: String?
@@ -42,8 +50,11 @@ class SettingsTableViewController: UITableViewController{
                     for result: AnyObject in fetchResults {
                         let picture = result.value(forKey: "picture")
                         image = picture == nil ? UIImage() : UIImage(data: picture as! Data)
-                        scale = result.value(forKey: "scale") as! CGFloat
-                        voiceName = result.value(forKey: "voiceName") as? String
+                        let soineData = result as! SoineData
+                        
+                        scale = CGFloat(soineData.scale)
+                        voiceName = soineData.voiceName
+                        categoryId = soineData.categoryData?.categoryId
                     }
                 }
             } catch  let e as NSError{
@@ -59,6 +70,33 @@ class SettingsTableViewController: UITableViewController{
         if let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
             versionLabel.text = version
         }
+        refreshData()
+    }
+    func refreshData() {
+        
+        categories = []
+        let request: NSFetchRequest<CategoryData> = CategoryData.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "categoryId", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        request.sortDescriptors = sortDescriptors
+        do {
+            let fetchResults = try viewContext.fetch(request)
+            for result: AnyObject in fetchResults {
+                categories.append(result as! CategoryData)
+            }
+        } catch let e as NSError{
+            print("error !!! : \(e)")
+        }
+        pickerView.selectRow(0, inComponent: 0, animated: false)
+        if targetId != nil && categoryId != nil{
+            for (i,category) in categories.enumerated() {
+                if categoryId == category.categoryId {
+                    pickerView.selectRow(i, inComponent: 0, animated: false)
+                    break
+                }
+            }
+        }
+        pickerView.reloadAllComponents()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,7 +108,7 @@ class SettingsTableViewController: UITableViewController{
         // それぞれのセクション毎に何行のセルがあるかを返します
         switch section {
         case 0: // 「設定」のセクション
-            return 3
+            return 5
         case 1: // 「その他」のセクション
             return 2
         default: // ここが実行されることはないはず
@@ -337,3 +375,52 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
     }
 }
 
+extension SettingsTableViewController:UIPickerViewDataSource,UIPickerViewDelegate{
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return categories[row].name
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("pickerView didSelectRow")
+        let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+        let request_cat: NSFetchRequest<CategoryData> = CategoryData.fetchRequest()
+        if targetId != nil {
+            request.predicate = NSPredicate(format: "id = %d", targetId!)
+        }
+        request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[row].categoryId)
+        var change = false
+        do {
+            let fetchResults_cat = try viewContext.fetch(request_cat)
+            let fetchResults = try viewContext.fetch(request)
+            //change
+            if(fetchResults.count != 0 && targetId != nil){
+                change = true
+                for result: AnyObject in fetchResults {
+                    let record = result as! SoineData
+                    record.id = targetId!
+                    record.categoryData = fetchResults_cat[0]
+                }
+                try viewContext.save()
+            }
+            //add
+            if !change {
+                let next_id = getNextId()
+                let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
+                let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
+                record.id = next_id
+//                record.categoryId = categories[row].categoryId
+                record.categoryData = fetchResults_cat[0]
+                appDelegate.saveContext()
+                targetId = next_id
+            }
+        } catch let e as NSError{
+            print("error !!! : \(e)")
+        }
+    }
+}

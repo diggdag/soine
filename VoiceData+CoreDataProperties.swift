@@ -2,7 +2,7 @@
 //  VoiceData+CoreDataProperties.swift
 //  
 //
-//  Created by 倉知諒 on 2022/05/03.
+//  Created by 倉知諒 on 2022/05/31.
 //
 //
 
@@ -16,8 +16,8 @@ extension VoiceData {
         return NSFetchRequest<VoiceData>(entityName: "VoiceData")
     }
 
-    @NSManaged public var id: Int16
     @NSManaged public var fileData: Data?
+    @NSManaged public var id: Int16
     @NSManaged public var soineData: SoineData?
 
 }
