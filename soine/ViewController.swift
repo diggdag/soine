@@ -156,22 +156,22 @@ extension ViewController:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let soineData: SoineData = datas[indexPath.section][indexPath.row]
-
         let cell: TableViewCell_list = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list") as! TableViewCell_list
-    
         let image:UIImage = soineData.picture == nil ? UIImage() : UIImage(data: soineData.picture!)!
         let voiceName: String = soineData.voiceName == nil ? "" : soineData.voiceName!
-        
-            
         cell.setCell(data: Data_list(
             voiceName: "\(voiceName)", category: image, scale: CGFloat(soineData.scale)))//\(String(soineData.id)):
-    
         cell.backgroundColor = UIColor.clear
         cell.contentView.backgroundColor = UIColor.clear
-        cell.btn.tag = (indexPath.section * 1000) + indexPath.row
-        cell.btn.addTarget(self, action: #selector(self.pushButton(_:)), for: .touchUpInside)
+        cell.btn.isHidden = false
+        if soineData.voiceName == nil {
+            cell.btn.isHidden = true
+        }
+        else{
+            cell.btn.tag = (indexPath.section * 1000) + indexPath.row
+            cell.btn.addTarget(self, action: #selector(self.pushButton(_:)), for: .touchUpInside)
+        }
         return cell
     }
     @objc private func pushButton(_ sender:UIButton)

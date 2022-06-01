@@ -111,4 +111,25 @@ extension CategoryEditingViewController:UITableViewDelegate{
             refreshData()
         }
     }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        print("\(sourceIndexPath.row)->\(destinationIndexPath.row)")
+        let category = categories[sourceIndexPath.row]
+        categories.remove(at: sourceIndexPath.row)
+        categories.insert(category, at: destinationIndexPath.row)
+        var categories_tmp: [CategoryData] = []
+        for (i,data) in categories.enumerated() {
+            data.categoryId = Int16(i)
+//            data.categoryId = Int16(categories.count - 1 - i)
+            categories_tmp.append(data)
+        }
+        categories = categories_tmp
+//        tableView.reloadData()
+        do{
+            try viewContext.save()
+        } catch let e as NSError{
+            print("error !!! : \(e)")
+        }
+        refreshData()
+    }
+
 }
