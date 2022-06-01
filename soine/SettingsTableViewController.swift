@@ -87,11 +87,14 @@ class SettingsTableViewController: UITableViewController{
         } catch let e as NSError{
             print("error !!! : \(e)")
         }
+        
+        //picker view
+        
         pickerView.selectRow(0, inComponent: 0, animated: false)
         if targetId != nil && categoryId != nil{
             for (i,category) in categories.enumerated() {
                 if categoryId == category.categoryId {
-                    pickerView.selectRow(i, inComponent: 0, animated: false)
+                    pickerView.selectRow(i + 1, inComponent: 0, animated: false)
                     break
                 }
             }
@@ -377,14 +380,19 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
 
 extension SettingsTableViewController:UIPickerViewDataSource,UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categories.count
+        return categories.count + 1
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categories[row].name
+        if row == 0 {
+            return "-"
+        }
+        else{
+            return categories[row - 1].name
+        }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("pickerView didSelectRow")
@@ -393,7 +401,9 @@ extension SettingsTableViewController:UIPickerViewDataSource,UIPickerViewDelegat
         if targetId != nil {
             request.predicate = NSPredicate(format: "id = %d", targetId!)
         }
-        request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[row].categoryId)
+        if row != 0 {
+            request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[row - 1].categoryId)
+        }
         var change = false
         do {
             let fetchResults_cat = try viewContext.fetch(request_cat)
@@ -404,7 +414,13 @@ extension SettingsTableViewController:UIPickerViewDataSource,UIPickerViewDelegat
                 for result: AnyObject in fetchResults {
                     let record = result as! SoineData
                     record.id = targetId!
-                    record.categoryData = fetchResults_cat[0]
+                    if row == 0 {
+                        record.categoryData = nil
+                    }
+                    else{
+                        record.categoryData = fetchResults_cat[0]
+                    }
+                    
                 }
                 try viewContext.save()
             }
@@ -415,7 +431,12 @@ extension SettingsTableViewController:UIPickerViewDataSource,UIPickerViewDelegat
                 let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
                 record.id = next_id
 //                record.categoryId = categories[row].categoryId
-                record.categoryData = fetchResults_cat[0]
+                if row == 0 {
+                    record.categoryData = nil
+                }
+                else{
+                    record.categoryData = fetchResults_cat[0]
+                }
                 appDelegate.saveContext()
                 targetId = next_id
             }
