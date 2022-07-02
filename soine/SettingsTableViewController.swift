@@ -128,7 +128,7 @@ class SettingsTableViewController: UITableViewController{
         case 0: // 「設定」のセクション
             return 5
         case 1: // 「その他」のセクション
-            return 2
+            return 0//要らないから表示しない
         default: // ここが実行されることはないはず
             return 0
         }
