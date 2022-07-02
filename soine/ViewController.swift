@@ -186,7 +186,11 @@ extension ViewController:UITableViewDataSource{
         return sections.count
     }
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return sections
+        var rtn :[String] = []
+        for sec in sections {
+            rtn.append(String(sec.prefix(3)))
+        }
+        return rtn
     }
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         return index

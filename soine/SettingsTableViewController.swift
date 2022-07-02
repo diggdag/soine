@@ -25,6 +25,7 @@ class SettingsTableViewController: UITableViewController{
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
     var categoryId:Int16? = nil
+    var ActivityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,20 @@ class SettingsTableViewController: UITableViewController{
         viewContext = appDelegate.persistentContainer.viewContext
         pickerView.dataSource = self
         pickerView.delegate = self
+        
+        // ActivityIndicatorを作成＆中央に配置
+        ActivityIndicator = UIActivityIndicatorView()
+        ActivityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        ActivityIndicator.center = self.view.center
+
+        // クルクルをストップした時に非表示する
+        ActivityIndicator.hidesWhenStopped = true
+
+        // 色を設定
+//        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+
+        //Viewに追加
+        self.view.addSubview(ActivityIndicator)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,7 +76,7 @@ class SettingsTableViewController: UITableViewController{
                 print("error !!! : \(e)")
             }
             //画像をセットする
-            Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale)
+            Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale/2)
             if voiceName != nil {
                 voiceLabel.text = voiceName
             }
@@ -134,6 +149,9 @@ class SettingsTableViewController: UITableViewController{
                 documentPicker.delegate = self
                 self.present(documentPicker, animated: true, completion: nil)
 //                callSoundLibrary()
+                
+                // クルクルスタート
+                ActivityIndicator.startAnimating()
             }
         }
     }
@@ -233,6 +251,8 @@ class SettingsTableViewController: UITableViewController{
 //}
 extension SettingsTableViewController:UIDocumentPickerDelegate{
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        // クルクルストップ
+        ActivityIndicator.stopAnimating()
         if (CFURLStartAccessingSecurityScopedResource(url as CFURL)) {
             print(url) // ここにURLが入っている
             let fileName = url.lastPathComponent
@@ -299,6 +319,10 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
         else {
             print("Permission error!")
         }
+    }
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController){
+        // クルクルストップ
+        ActivityIndicator.stopAnimating()
     }
 }
 extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
@@ -372,7 +396,7 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
             }
             
             //背景設定
-            Utilities.settingBackground(playerView: &bg, _image: image,scale: scale)
+            Utilities.settingBackground(playerView: &bg, _image: image,scale: scale/2)
             self.dismiss(animated: true, completion: nil)
         }
     }
