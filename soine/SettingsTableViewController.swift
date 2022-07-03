@@ -44,10 +44,14 @@ class SettingsTableViewController: UITableViewController{
         ActivityIndicator.hidesWhenStopped = true
 
         // 色を設定
-//        ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        ActivityIndicator.style = UIActivityIndicatorView.Style.medium
 
         //Viewに追加
         self.view.addSubview(ActivityIndicator)
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = "もどる"
+        navigationItem.backBarButtonItem = backButton
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -152,6 +156,8 @@ class SettingsTableViewController: UITableViewController{
                 
                 // クルクルスタート
                 ActivityIndicator.startAnimating()
+                // セルの選択を解除
+//                tableView.deselectRow(at: indexPath, animated: true)
             }
         }
     }
@@ -314,6 +320,8 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
                 print("error !!! : \(e)")
             }
             voiceLabel.text = fileName
+            let indexPath = IndexPath(row: 2, section: 0)
+            tableView.reloadRows(at: [indexPath], with: .none)
             CFURLStopAccessingSecurityScopedResource(url as CFURL) // <- and here
         }
         else {

@@ -81,9 +81,9 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxT-9n-MhJ">
-                                                    <rect key="frame" x="369" y="27.5" width="40" height="31"/>
+                                                    <rect key="frame" x="360.5" y="27.5" width="48.5" height="31"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="music.note" catalog="system"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="speaker.wave.2" catalog="system"/>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LRK-Ds-Mk7">
                                                     <rect key="frame" x="0.0" y="0.0" width="130" height="86"/>
@@ -91,8 +91,8 @@
                                                         <constraint firstAttribute="width" constant="130" id="JcG-Lx-grE"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adr-Jd-EpS">
-                                                    <rect key="frame" x="130" y="32.5" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adr-Jd-EpS">
+                                                    <rect key="frame" x="130" y="33" width="214" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -107,6 +107,7 @@
                                                 <constraint firstItem="LRK-Ds-Mk7" firstAttribute="leading" secondItem="REG-Ob-e3a" secondAttribute="leading" id="blz-AG-OdE"/>
                                                 <constraint firstItem="x7X-GW-1Wt" firstAttribute="centerY" secondItem="REG-Ob-e3a" secondAttribute="centerY" id="fwj-Wj-Y98"/>
                                                 <constraint firstAttribute="trailing" secondItem="x7X-GW-1Wt" secondAttribute="trailing" id="gFD-71-whq"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="adr-Jd-EpS" secondAttribute="trailing" constant="50" id="hCy-rI-S0f"/>
                                                 <constraint firstItem="wxT-9n-MhJ" firstAttribute="centerY" secondItem="REG-Ob-e3a" secondAttribute="centerY" id="m4L-OZ-Qi2"/>
                                                 <constraint firstAttribute="bottom" secondItem="LRK-Ds-Mk7" secondAttribute="bottom" id="mLy-Tk-0Wj"/>
                                                 <constraint firstAttribute="trailing" secondItem="wxT-9n-MhJ" secondAttribute="trailing" constant="5" id="pg9-EB-AfV"/>
@@ -263,16 +264,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Jas-pH-Xcb">
-                                        <rect key="frame" x="0.0" y="662.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="52" id="Jas-pH-Xcb">
+                                        <rect key="frame" x="0.0" y="662.5" width="414" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jas-pH-Xcb" id="R0Z-Ng-lvc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oh9-8x-Gd3">
-                                                    <rect key="frame" x="152" y="6" width="110" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oh9-8x-Gd3">
+                                                    <rect key="frame" x="152" y="10.5" width="110" height="31"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="カテゴリ編集"/>
                                                     <connections>
@@ -280,6 +280,10 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Oh9-8x-Gd3" firstAttribute="centerX" secondItem="R0Z-Ng-lvc" secondAttribute="centerX" id="bEa-Lx-d9b"/>
+                                                <constraint firstItem="Oh9-8x-Gd3" firstAttribute="centerY" secondItem="R0Z-Ng-lvc" secondAttribute="centerY" id="jlC-bh-TFx"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -287,7 +291,7 @@
                             <tableViewSection id="B83-jX-z4S">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="y2W-nU-cE8" detailTextLabel="xHt-fN-rHg" style="IBUITableViewCellStyleValue1" id="9F0-Ee-mKc">
-                                        <rect key="frame" x="0.0" y="742" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="750.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9F0-Ee-mKc" id="51c-W1-R7f">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -311,7 +315,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Gkz-78-y7F" style="IBUITableViewCellStyleDefault" id="bvQ-YF-rs4">
-                                        <rect key="frame" x="0.0" y="785.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="794" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bvQ-YF-rs4" id="9oE-gJ-cdQ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -451,8 +455,8 @@
     </scenes>
     <resources>
         <image name="highlighter" catalog="system" width="128" height="119"/>
-        <image name="music.note" catalog="system" width="97" height="128"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
+        <image name="speaker.wave.2" catalog="system" width="128" height="90"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

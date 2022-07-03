@@ -44,6 +44,10 @@ class ViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = "もどる"
+        navigationItem.backBarButtonItem = backButton
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,6 +90,7 @@ class ViewController: UIViewController {
             print("error !!! : \(e)")
         }
         tableView.reloadData()
+//        UIView.transition(with: tableView, duration: 1.0, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
     }
     func appendSections() {
         sections = []
