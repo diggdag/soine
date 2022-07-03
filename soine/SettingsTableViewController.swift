@@ -20,12 +20,23 @@ class SettingsTableViewController: UITableViewController{
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var voiceLabel: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var loopFlag: UISwitch!
+    @IBOutlet weak var interval: UISlider!
+    @IBOutlet weak var intervalLabel: UILabel!
     var targetId:Int16? = nil
     
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
     var categoryId:Int16? = nil
     var ActivityIndicator: UIActivityIndicatorView!
+    var scale:CGFloat? = nil
+    var imageData:Data? = nil//image file data
+    var fileName:String? = nil
+    var fileExtention:String? = nil
+    var fileData:Data? = nil//voice file data
+    var selectedRow:Int = 0
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +67,8 @@ class SettingsTableViewController: UITableViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var image:UIImage? = nil
-        var scale:CGFloat = CGFloat(1)
-        var voiceName: String?
+//        var scale:CGFloat = CGFloat(1)
+//        var voiceName: String?
         let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
 
         if targetId != nil {
@@ -72,7 +83,10 @@ class SettingsTableViewController: UITableViewController{
                         let soineData = result as! SoineData
                         
                         scale = CGFloat(soineData.scale)
-                        voiceName = soineData.voiceName
+                        imageData = soineData.picture
+                        fileName = soineData.voiceName
+                        fileExtention = soineData.voiceFileExtention
+                        fileData = soineData.voiceData?.fileData
                         categoryId = soineData.categoryData?.categoryId
                     }
                 }
@@ -80,9 +94,9 @@ class SettingsTableViewController: UITableViewController{
                 print("error !!! : \(e)")
             }
             //画像をセットする
-            Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale/2)
-            if voiceName != nil {
-                voiceLabel.text = voiceName
+            Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale!/2)
+            if fileName != nil {
+                voiceLabel.text = fileName
             }
         }
         // アプリのバージョン
@@ -114,6 +128,7 @@ class SettingsTableViewController: UITableViewController{
             for (i,category) in categories.enumerated() {
                 if categoryId == category.categoryId {
                     pickerView.selectRow(i + 1, inComponent: 0, animated: false)
+                    selectedRow = i + 1
                     break
                 }
             }
@@ -130,7 +145,7 @@ class SettingsTableViewController: UITableViewController{
         // それぞれのセクション毎に何行のセルがあるかを返します
         switch section {
         case 0: // 「設定」のセクション
-            return 5
+            return 9
         case 1: // 「その他」のセクション
             return 0//要らないから表示しない
         default: // ここが実行されることはないはず
@@ -161,7 +176,96 @@ class SettingsTableViewController: UITableViewController{
             }
         }
     }
-
+    @IBAction func touchDown_save(_ sender: Any) {
+        
+        let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+        let request_cat: NSFetchRequest<CategoryData> = CategoryData.fetchRequest()
+        if targetId != nil {
+//                request.predicate = NSPredicate(format: "id = \(targetId)")
+            request.predicate = NSPredicate(format: "id = %d", targetId!)
+        }
+        
+        var change = false
+        //create voice data
+        let entity_voice = NSEntityDescription.entity(forEntityName: "VoiceData", in: viewContext)
+        let record_voice = NSManagedObject(entity: entity_voice!, insertInto: viewContext) as! VoiceData
+//                record_voice.id = targetId!
+        record_voice.fileData = fileData
+        
+        if selectedRow != 0 {
+            request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[selectedRow - 1].categoryId)
+        }
+        //change
+        do {
+            let fetchResults = try viewContext.fetch(request)
+            let fetchResults_cat = try viewContext.fetch(request_cat)
+            if(fetchResults.count != 0 && targetId != nil){
+                change=true
+                for result: AnyObject in fetchResults {
+                    let record = result as! SoineData
+                    record.id = targetId!
+                    
+                    //image
+                    record.picture = imageData
+                    if scale != nil {
+                        record.scale = Float(scale!)
+                    }
+                    
+                    //voice
+                    record.voiceName = fileName
+                    record.voiceFileExtention = fileExtention
+                    record_voice.id = targetId!
+                    record.voiceData = record_voice
+                    
+                    //category
+                    if selectedRow == 0 {
+                        record.categoryData = nil
+                    }
+                    else{
+                        record.categoryData = fetchResults_cat[0]
+                    }
+                    
+                }
+                try viewContext.save()
+            }
+            //add
+            if !change {
+                let next_id = getNextId()
+                let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
+                let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
+                record.id = next_id
+                
+                //image
+                record.picture = imageData
+                if scale != nil {
+                    record.scale = Float(scale!)
+                }
+                
+                //voice
+                record.voiceName = fileName
+                record.voiceFileExtention = fileExtention
+                record_voice.id = next_id
+                record.voiceData = record_voice
+                
+                //category
+                if selectedRow == 0 {
+                    record.categoryData = nil
+                }
+                else{
+                    record.categoryData = fetchResults_cat[0]
+                }
+                
+                appDelegate.saveContext()
+                targetId = next_id
+            }
+        } catch let e as NSError{
+            print("error !!! : \(e)")
+        }
+        
+    }
+    @IBAction func editingChanged_interval(_ sender: Any) {
+    }
+    
     deinit {
     // UserDefaultsの変更の監視を解除する
         NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
@@ -261,61 +365,19 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
         ActivityIndicator.stopAnimating()
         if (CFURLStartAccessingSecurityScopedResource(url as CFURL)) {
             print(url) // ここにURLが入っている
-            let fileName = url.lastPathComponent
-            let fileExtention = url.pathExtension
+            fileName = url.lastPathComponent
+            fileExtention = url.pathExtension
             
             do {
                 print("canOpenURL : \(UIApplication.shared.canOpenURL(url))")
                 print("extention : \(fileExtention)")
                 // AVAudioPlayerのインスタンス化
-                let fileData = try Data(contentsOf: url)
+                fileData = try Data(contentsOf: url)
                 
                 print("Data : \(fileData)")
                 
-                let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-//                var predicate:NSPredicate
-//                predicate =
-                if targetId != nil {
-//                    request.predicate = NSPredicate(format: "id = \(targetId)")
-                    request.predicate = NSPredicate(format: "id = %d", targetId!)
-                }
                 
-                //create voice data
-                let entity_voice = NSEntityDescription.entity(forEntityName: "VoiceData", in: viewContext)
-                let record_voice = NSManagedObject(entity: entity_voice!, insertInto: viewContext) as! VoiceData
-//                record_voice.id = targetId!
-                record_voice.fileData = fileData
                 
-                var change = false
-                //change
-                let fetchResults = try viewContext.fetch(request)
-                if(fetchResults.count != 0 && targetId != nil){
-                    change = true
-                    for result: AnyObject in fetchResults {
-                        let record = result as! SoineData
-                        record.id = targetId!
-                        record.voiceName = fileName
-                        record.voiceFileExtention = fileExtention
-                        record_voice.id = targetId!
-                        record.voiceData = record_voice
-                    }
-                    try viewContext.save()
-                }
-                //add
-                if !change {
-                    var next_id = getNextId()
-                    
-                    let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
-                    let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
-                    record.id = next_id
-                    record.voiceName = fileName
-                    record.voiceFileExtention = fileExtention
-                    record_voice.id = next_id
-                    record.voiceData = record_voice
-                    
-                    appDelegate.saveContext()
-                    targetId = next_id
-                }
             } catch let e as NSError{
                 print("error !!! : \(e)")
             }
@@ -338,7 +400,6 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         if let _image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
-            let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
 //            var predicate:NSPredicate
             // スクリーンの縦横サイズを取得
             let playerViewWidth:CGFloat = bg.frame.size.width
@@ -358,53 +419,14 @@ extension SettingsTableViewController:UIImagePickerControllerDelegate,UINavigati
 //                image = UIImage(cgImage: _image.cgImage!, scale: _image.scale, orientation: .up)
 //            }
             
-            let scale:CGFloat = playerViewWidth / imgWidth
+            scale = playerViewWidth / imgWidth
             print("register scale : \(scale)")
-            
-//            predicate =
-            if targetId != nil {
-//                request.predicate = NSPredicate(format: "id = \(targetId)")
-                request.predicate = NSPredicate(format: "id = %d", targetId!)
-            }
-            
-            
-            var change = false
-            
-//            let imageData = UIImage.pngData(image.reSizeImage(size: CGSize(width: imgWidth, height: imgHeight))!)
-                        
-            let imageData = image.reSizeImage(size: CGSize(width: imgWidth, height: imgHeight))!.pngData()
+            imageData = image.reSizeImage(size: CGSize(width: imgWidth, height: imgHeight))!.pngData()
             print("image data : \(imageData)")
             
-            //change
-            do {
-                let fetchResults = try viewContext.fetch(request)
-                if(fetchResults.count != 0 && targetId != nil){
-                    change=true
-                    for result: AnyObject in fetchResults {
-                        let record = result as! SoineData
-                        record.id = targetId!
-                        record.picture = imageData
-                        record.scale = Float(scale)
-                    }
-                    try viewContext.save()
-                }
-            } catch let e as NSError{
-                print("error !!! : \(e)")
-            }
-            //add
-            if !change {
-                let next_id = getNextId()
-                let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
-                let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
-                record.id = next_id
-                record.picture = imageData
-                record.scale = Float(scale)
-                appDelegate.saveContext()
-                targetId = next_id
-            }
             
             //背景設定
-            Utilities.settingBackground(playerView: &bg, _image: image,scale: scale/2)
+            Utilities.settingBackground(playerView: &bg, _image: image,scale: scale!/2)
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -428,52 +450,6 @@ extension SettingsTableViewController:UIPickerViewDataSource,UIPickerViewDelegat
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("pickerView didSelectRow")
-        let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-        let request_cat: NSFetchRequest<CategoryData> = CategoryData.fetchRequest()
-        if targetId != nil {
-            request.predicate = NSPredicate(format: "id = %d", targetId!)
-        }
-        if row != 0 {
-            request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[row - 1].categoryId)
-        }
-        var change = false
-        do {
-            let fetchResults_cat = try viewContext.fetch(request_cat)
-            let fetchResults = try viewContext.fetch(request)
-            //change
-            if(fetchResults.count != 0 && targetId != nil){
-                change = true
-                for result: AnyObject in fetchResults {
-                    let record = result as! SoineData
-                    record.id = targetId!
-                    if row == 0 {
-                        record.categoryData = nil
-                    }
-                    else{
-                        record.categoryData = fetchResults_cat[0]
-                    }
-                    
-                }
-                try viewContext.save()
-            }
-            //add
-            if !change {
-                let next_id = getNextId()
-                let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
-                let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
-                record.id = next_id
-//                record.categoryId = categories[row].categoryId
-                if row == 0 {
-                    record.categoryData = nil
-                }
-                else{
-                    record.categoryData = fetchResults_cat[0]
-                }
-                appDelegate.saveContext()
-                targetId = next_id
-            }
-        } catch let e as NSError{
-            print("error !!! : \(e)")
-        }
+        selectedRow = row
     }
 }
