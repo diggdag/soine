@@ -12,6 +12,7 @@ import MediaPlayer
 import CoreData
 import UniformTypeIdentifiers
 import AVFoundation
+import Toast_Swift
 
 class SettingsTableViewController: UITableViewController{
     var categories:[CategoryData] = []
@@ -261,7 +262,16 @@ class SettingsTableViewController: UITableViewController{
         } catch let e as NSError{
             print("error !!! : \(e)")
         }
-        
+//        self.view.makeToast("ほぞん完了！")
+        let screenSizeWidth = UIScreen.main.bounds.width
+        let screenSizeHeight = UIScreen.main.bounds.height
+        let offsetY = self.tableView.contentOffset.y
+        var hosei = offsetY
+        if hosei < 0 {
+            hosei = 0
+        }
+        print("tableview offset y : \(offsetY)")
+        self.view.makeToast("ほぞん完了！", point: CGPoint(x: screenSizeWidth/2, y: screenSizeHeight/2+hosei), title: nil, image: nil, completion: nil)
     }
     @IBAction func editingChanged_interval(_ sender: Any) {
     }
