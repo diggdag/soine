@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 import CoreData
+import Toast_Swift
 
 class ViewController: UIViewController {
     
@@ -232,6 +233,11 @@ extension ViewController:UITableViewDelegate{
             } catch let e as NSError{
                 print("error !!! : \(e)")
             }
+            
+            let screenSizeWidth = UIScreen.main.bounds.width
+            let screenSizeHeight = UIScreen.main.bounds.height
+            self.view.makeToast("削除しました", point: CGPoint(x: screenSizeWidth/2, y: screenSizeHeight/2), title: nil, image: nil, completion: nil)
+            
             refrechData()
         }
     }
