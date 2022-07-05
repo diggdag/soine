@@ -40,8 +40,12 @@ class SoineViewController: UIViewController {
             let fetchResults = try viewContext.fetch(request)
             if fetchResults.count != 0 {
                 for result: AnyObject in fetchResults {
-                    image = UIImage(data: result.value(forKey: "picture") as! Data)
-                    scale = result.value(forKey: "scale") as! CGFloat
+                    if result.value(forKey: "picture") != nil {
+                        image = UIImage(data: result.value(forKey: "picture") as! Data)
+                    }
+                    if result.value(forKey: "scale") != nil {
+                        scale = result.value(forKey: "scale") as! CGFloat
+                    }
                     let voiceData = result.value(forKey: "voiceData") as? VoiceData
                     voice = voiceData?.fileData
 //                        voiceName = result.value(forKey: "voiceName") as? String
