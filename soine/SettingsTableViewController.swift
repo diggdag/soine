@@ -24,6 +24,8 @@ class SettingsTableViewController: UITableViewController{
     @IBOutlet weak var loopFlag: UISwitch!
     @IBOutlet weak var interval: UISlider!
     @IBOutlet weak var intervalLabel: UILabel!
+    @IBOutlet weak var loopFlagTitleLabel: UILabel!
+    @IBOutlet weak var intervalTitleLabel: UILabel!
     var targetId:Int16? = nil
     
     var appDelegate:AppDelegate!
@@ -36,6 +38,8 @@ class SettingsTableViewController: UITableViewController{
     var fileExtention:String? = nil
     var fileData:Data? = nil//voice file data
     var selectedRow:Int = 0
+    var voiceInterval:Int = 0
+    
     
     
     
@@ -71,7 +75,14 @@ class SettingsTableViewController: UITableViewController{
 //        var scale:CGFloat = CGFloat(1)
 //        var voiceName: String?
         let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-
+        
+        loopFlag.isEnabled = false
+        loopFlagTitleLabel.isEnabled = false
+        
+        interval.isEnabled = false
+        intervalLabel.isEnabled = false
+        intervalTitleLabel.isEnabled = false
+        
         if targetId != nil {
             request.predicate = NSPredicate(format: "id = %d", targetId!)
         
@@ -89,6 +100,10 @@ class SettingsTableViewController: UITableViewController{
                         fileExtention = soineData.voiceFileExtention
                         fileData = soineData.voiceData?.fileData
                         categoryId = soineData.categoryData?.categoryId
+                        loopFlag.setOn(soineData.voiceLoopFlg, animated: false)
+                        voiceInterval = Int(soineData.voiceInterval)
+                        intervalLabel.text = "\(voiceInterval)秒"
+                        interval.setValue(Float(voiceInterval), animated: false)
                     }
                 }
             } catch  let e as NSError{
@@ -98,6 +113,13 @@ class SettingsTableViewController: UITableViewController{
             Utilities.settingBackground(playerView: &bg, _image: image ?? UIImage(),scale: scale!/2)
             if fileName != nil {
                 voiceLabel.text = fileName
+                loopFlag.isEnabled = true
+                loopFlagTitleLabel.isEnabled = true
+                if loopFlag.isOn {
+                    interval.isEnabled = true
+                    intervalLabel.isEnabled = true
+                    intervalTitleLabel.isEnabled = true
+                }
             }
         }
         // アプリのバージョン
@@ -217,6 +239,8 @@ class SettingsTableViewController: UITableViewController{
                     record.voiceFileExtention = fileExtention
                     record_voice.id = targetId!
                     record.voiceData = record_voice
+                    record.voiceLoopFlg = loopFlag.isOn
+                    record.voiceInterval = Int16(voiceInterval)
                     
                     //category
                     if selectedRow == 0 {
@@ -247,6 +271,8 @@ class SettingsTableViewController: UITableViewController{
                 record.voiceFileExtention = fileExtention
                 record_voice.id = next_id
                 record.voiceData = record_voice
+                record.voiceLoopFlg = loopFlag.isOn
+                record.voiceInterval = Int16(voiceInterval)
                 
                 //category
                 if selectedRow == 0 {
@@ -275,6 +301,24 @@ class SettingsTableViewController: UITableViewController{
     }
     @IBAction func editingChanged_interval(_ sender: Any) {
     }
+    @IBAction func valueChanged_loopFlg(_ sender: Any) {
+        interval.setNeedsLayout()
+        interval.isEnabled = loopFlag.isOn
+        intervalLabel.isEnabled = loopFlag.isOn
+        intervalTitleLabel.isEnabled = loopFlag.isOn
+        
+//        let indexPath = IndexPath(row: 5, section: 0)
+//        tableView.reloadRows(at: [indexPath], with: .none)
+    }
+    @IBAction func valueChanged_interval(_ sender: Any) {
+        print("interval value : \(interval.value)")
+        voiceInterval = Int(round(interval.value))
+        intervalLabel.text = "\(voiceInterval)秒"
+//        interval.setValue(v, animated: false)
+    }
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("touchesEnded")
+//    }
     
     deinit {
     // UserDefaultsの変更の監視を解除する
@@ -392,6 +436,14 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
                 print("error !!! : \(e)")
             }
             voiceLabel.text = fileName
+            
+            loopFlag.isEnabled = true
+            loopFlagTitleLabel.isEnabled = true
+            
+            interval.isEnabled = true
+            intervalLabel.isEnabled = true
+            intervalTitleLabel.isEnabled = true
+            
             let indexPath = IndexPath(row: 2, section: 0)
             tableView.reloadRows(at: [indexPath], with: .none)
             CFURLStopAccessingSecurityScopedResource(url as CFURL) // <- and here
