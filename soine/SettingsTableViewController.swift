@@ -123,7 +123,7 @@ class SettingsTableViewController: UITableViewController{
         }
         
         //picker view
-        
+        selectedRow = 0
         pickerView.selectRow(0, inComponent: 0, animated: false)
         if targetId != nil && categoryId != nil{
             for (i,category) in categories.enumerated() {
