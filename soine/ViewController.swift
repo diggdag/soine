@@ -9,6 +9,7 @@ import UIKit
 import Photos
 import CoreData
 import Toast_Swift
+import GoogleMobileAds
 
 class ViewController: UIViewController {
     
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
     var existNonCategorize = false
+    var bannerView: GADBannerView!
     override func viewDidLoad() {
         super.viewDidLoad()
         print("ViewController viewDidLoad")
@@ -49,6 +51,13 @@ class ViewController: UIViewController {
         let backButton = UIBarButtonItem()
         backButton.title = "もどる"
         navigationItem.backBarButtonItem = backButton
+        
+        // In this case, we instantiate the banner with desired ad size.
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        addBannerViewToView(bannerView)
+        bannerView.load(GADRequest())
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -151,7 +160,26 @@ class ViewController: UIViewController {
     @IBAction func toushDown_edit(_ sender: Any) {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
-    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+          [NSLayoutConstraint(item: bannerView,
+                              attribute: .bottom,
+                              relatedBy: .equal,
+                              toItem: bottomLayoutGuide,
+                              attribute: .top,
+                              multiplier: 1,
+                              constant: 0),
+           NSLayoutConstraint(item: bannerView,
+                              attribute: .centerX,
+                              relatedBy: .equal,
+                              toItem: view,
+                              attribute: .centerX,
+                              multiplier: 1,
+                              constant: 0)
+          ])
+       }
 }
 ///////////////////////////
 ///extentions
@@ -163,6 +191,18 @@ extension ViewController:UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let soineData: SoineData = datas[indexPath.section][indexPath.row]
+        if soineData.adFlg {
+            let cell: TableViewCell_list_ad = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list_ad") as! TableViewCell_list_ad
+            cell.setCell(unitId: "ca-app-pub-3940256099942544/2934735716", rootViewController: self)
+//            let bannerViewCell:GADBannerView!
+//
+//            bannerViewCell = GADBannerView(adSize: kGADAdSizeLargeBanner)
+//            bannerViewCell.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//            bannerViewCell.rootViewController = self
+//            cell.addSubview(bannerViewCell)
+//            bannerViewCell.load(GADRequest())
+            return cell
+        }
         let cell: TableViewCell_list = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list") as! TableViewCell_list
         let image:UIImage = soineData.picture == nil ? UIImage() : UIImage(data: soineData.picture!)!
         let voiceName: String = soineData.voiceName == nil ? "" : soineData.voiceName!

@@ -200,7 +200,48 @@ class SettingsTableViewController: UITableViewController{
         }
     }
     @IBAction func touchDown_save(_ sender: Any) {
+        var adCount = 0
+        var dataCount = 0
+        let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+        let request_ad: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+        do {
+            request.predicate = NSPredicate(format: "adFlg = true")
+            var fetchResults = try viewContext.fetch(request)
+            adCount = fetchResults.count
+            fetchResults = try viewContext.fetch(request_ad)
+            dataCount = fetchResults.count
+        }
+        catch  let e as NSError{
+            print("error !!! : \(e)")
+        }
         
+        if targetId == nil{
+            //add
+            if (addAd(dataCount: dataCount, adCount: adCount))
+            {
+                save(adFlag: true)//add ad
+            }
+        }
+        save(adFlag: false)
+        
+//        self.view.makeToast("ほぞん完了！")
+        let screenSizeWidth = UIScreen.main.bounds.width
+        let screenSizeHeight = UIScreen.main.bounds.height
+        let offsetY = self.tableView.contentOffset.y
+        var hosei = offsetY
+        if hosei < 0 {
+            hosei = 0
+        }
+        print("tableview offset y : \(offsetY)")
+        self.view.makeToast("ほぞん完了！", point: CGPoint(x: screenSizeWidth/2, y: screenSizeHeight/2+hosei), title: nil, image: nil, completion: nil)
+    }
+    func addAd(dataCount:Int,adCount:Int) -> Bool {
+        let interval = 5
+        let tekiseisu = Int(dataCount/interval)
+        print("adCount : \(adCount),tekiseisu : \(tekiseisu)")
+        return adCount < tekiseisu
+    }
+    func save(adFlag:Bool){
         let request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
         let request_cat: NSFetchRequest<CategoryData> = CategoryData.fetchRequest()
         if targetId != nil {
@@ -282,22 +323,18 @@ class SettingsTableViewController: UITableViewController{
                     record.categoryData = fetchResults_cat[0]
                 }
                 
+                //ad
+                record.adFlg = adFlag
+                
                 appDelegate.saveContext()
-                targetId = next_id
+                
+                if !adFlag {
+                    targetId = next_id
+                }
             }
         } catch let e as NSError{
             print("error !!! : \(e)")
         }
-//        self.view.makeToast("ほぞん完了！")
-        let screenSizeWidth = UIScreen.main.bounds.width
-        let screenSizeHeight = UIScreen.main.bounds.height
-        let offsetY = self.tableView.contentOffset.y
-        var hosei = offsetY
-        if hosei < 0 {
-            hosei = 0
-        }
-        print("tableview offset y : \(offsetY)")
-        self.view.makeToast("ほぞん完了！", point: CGPoint(x: screenSizeWidth/2, y: screenSizeHeight/2+hosei), title: nil, image: nil, completion: nil)
     }
     @IBAction func editingChanged_interval(_ sender: Any) {
     }

@@ -11,6 +11,12 @@
 		4E2B583453DE95A491EAAF8C /* Pods_soine_soineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7FE51060977A5E0C9FBAFE /* Pods_soine_soineUITests.framework */; };
 		CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */; };
 		CF2530D428427A5A009570DD /* CategoryEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2530D328427A5A009570DD /* CategoryEditingViewController.swift */; };
+		CF42F98828756BE100A0591A /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF42F98228756BE100A0591A /* SoineData+CoreDataProperties.swift */; };
+		CF42F98928756BE100A0591A /* CategoryData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF42F98328756BE100A0591A /* CategoryData+CoreDataClass.swift */; };
+		CF42F98A28756BE100A0591A /* VoiceData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF42F98428756BE100A0591A /* VoiceData+CoreDataClass.swift */; };
+		CF42F98B28756BE100A0591A /* CategoryData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF42F98528756BE100A0591A /* CategoryData+CoreDataProperties.swift */; };
+		CF42F98C28756BE100A0591A /* VoiceData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF42F98628756BE100A0591A /* VoiceData+CoreDataProperties.swift */; };
+		CF42F98D28756BE100A0591A /* SoineData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF42F98728756BE100A0591A /* SoineData+CoreDataClass.swift */; };
 		CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4DA6AF2812EA580084B7E5 /* SettingsTableViewController.swift */; };
 		CF4DA6B72812FC6C0084B7E5 /* Pods_soine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5D8506BB64AC045F4F4074 /* Pods_soine.framework */; };
 		CF4DA6BA2813B3600084B7E5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4DA6B92813B3600084B7E5 /* Utilities.swift */; };
@@ -19,12 +25,8 @@
 		CF5151AB28438D65002BFF69 /* SettingCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5151AA28438D65002BFF69 /* SettingCategoryViewController.swift */; };
 		CF5151AD28439625002BFF69 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5151AC28439625002BFF69 /* Enums.swift */; };
 		CF8F3D4328144A5000A47CF5 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8F3D4228144A5000A47CF5 /* Extentions.swift */; };
-		CF98A20528751F53002C8A5C /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A1FF28751F53002C8A5C /* SoineData+CoreDataProperties.swift */; };
-		CF98A20628751F53002C8A5C /* CategoryData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20028751F53002C8A5C /* CategoryData+CoreDataProperties.swift */; };
-		CF98A20728751F53002C8A5C /* SoineData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20128751F53002C8A5C /* SoineData+CoreDataClass.swift */; };
-		CF98A20828751F53002C8A5C /* VoiceData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20228751F53002C8A5C /* VoiceData+CoreDataClass.swift */; };
-		CF98A20928751F53002C8A5C /* CategoryData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20328751F53002C8A5C /* CategoryData+CoreDataClass.swift */; };
-		CF98A20A28751F53002C8A5C /* VoiceData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20428751F53002C8A5C /* VoiceData+CoreDataProperties.swift */; };
+		CF98A20E28755635002C8A5C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF98A20D28755635002C8A5C /* GoogleService-Info.plist */; };
+		CF98A21028755FB1002C8A5C /* TableViewCell_list_ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20F28755FB1002C8A5C /* TableViewCell_list_ad.swift */; };
 		CFD4CB5C2812DF4000D746B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5B2812DF4000D746B2 /* AppDelegate.swift */; };
 		CFD4CB5E2812DF4000D746B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5D2812DF4000D746B2 /* SceneDelegate.swift */; };
 		CFD4CB602812DF4000D746B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5F2812DF4000D746B2 /* ViewController.swift */; };
@@ -79,6 +81,12 @@
 		CE65AD748C9251F6F308D146 /* Pods-soineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soineTests.debug.xcconfig"; path = "Target Support Files/Pods-soineTests/Pods-soineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell_list.swift; sourceTree = "<group>"; };
 		CF2530D328427A5A009570DD /* CategoryEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditingViewController.swift; sourceTree = "<group>"; };
+		CF42F98228756BE100A0591A /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF42F98328756BE100A0591A /* CategoryData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF42F98428756BE100A0591A /* VoiceData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VoiceData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF42F98528756BE100A0591A /* CategoryData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF42F98628756BE100A0591A /* VoiceData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VoiceData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF42F98728756BE100A0591A /* SoineData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CF4DA6AF2812EA580084B7E5 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		CF4DA6B12812FA8E0084B7E5 /* ImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4DA6B32812FC610084B7E5 /* ImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,12 +96,8 @@
 		CF5151AA28438D65002BFF69 /* SettingCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCategoryViewController.swift; sourceTree = "<group>"; };
 		CF5151AC28439625002BFF69 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		CF8F3D4228144A5000A47CF5 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
-		CF98A1FF28751F53002C8A5C /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CF98A20028751F53002C8A5C /* CategoryData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryData+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CF98A20128751F53002C8A5C /* SoineData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CF98A20228751F53002C8A5C /* VoiceData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VoiceData+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CF98A20328751F53002C8A5C /* CategoryData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryData+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CF98A20428751F53002C8A5C /* VoiceData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VoiceData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF98A20D28755635002C8A5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CF98A20F28755FB1002C8A5C /* TableViewCell_list_ad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell_list_ad.swift; sourceTree = "<group>"; };
 		CFD4CB582812DF4000D746B2 /* soine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD4CB5B2812DF4000D746B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFD4CB5D2812DF4000D746B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,12 +170,12 @@
 		CFD4CB4F2812DF4000D746B2 = {
 			isa = PBXGroup;
 			children = (
-				CF98A20228751F53002C8A5C /* VoiceData+CoreDataClass.swift */,
-				CF98A20428751F53002C8A5C /* VoiceData+CoreDataProperties.swift */,
-				CF98A20128751F53002C8A5C /* SoineData+CoreDataClass.swift */,
-				CF98A1FF28751F53002C8A5C /* SoineData+CoreDataProperties.swift */,
-				CF98A20328751F53002C8A5C /* CategoryData+CoreDataClass.swift */,
-				CF98A20028751F53002C8A5C /* CategoryData+CoreDataProperties.swift */,
+				CF42F98328756BE100A0591A /* CategoryData+CoreDataClass.swift */,
+				CF42F98528756BE100A0591A /* CategoryData+CoreDataProperties.swift */,
+				CF42F98728756BE100A0591A /* SoineData+CoreDataClass.swift */,
+				CF42F98228756BE100A0591A /* SoineData+CoreDataProperties.swift */,
+				CF42F98428756BE100A0591A /* VoiceData+CoreDataClass.swift */,
+				CF42F98628756BE100A0591A /* VoiceData+CoreDataProperties.swift */,
 				CFD4CB5A2812DF4000D746B2 /* soine */,
 				CFD4CB742812DF4A00D746B2 /* soineTests */,
 				CFD4CB7E2812DF4A00D746B2 /* soineUITests */,
@@ -200,6 +204,7 @@
 				CF2530D328427A5A009570DD /* CategoryEditingViewController.swift */,
 				CF5151AA28438D65002BFF69 /* SettingCategoryViewController.swift */,
 				CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */,
+				CF98A20F28755FB1002C8A5C /* TableViewCell_list_ad.swift */,
 				CFD4CB5B2812DF4000D746B2 /* AppDelegate.swift */,
 				CFD4CB5D2812DF4000D746B2 /* SceneDelegate.swift */,
 				CF4DA6B92813B3600084B7E5 /* Utilities.swift */,
@@ -210,6 +215,7 @@
 				CFD4CB672812DF4A00D746B2 /* Assets.xcassets */,
 				CFD4CB692812DF4A00D746B2 /* LaunchScreen.storyboard */,
 				CFD4CB6C2812DF4A00D746B2 /* Info.plist */,
+				CF98A20D28755635002C8A5C /* GoogleService-Info.plist */,
 				CFD4CB642812DF4000D746B2 /* soine.xcdatamodeld */,
 			);
 			path = soine;
@@ -343,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFD4CB6B2812DF4A00D746B2 /* LaunchScreen.storyboard in Resources */,
+				CF98A20E28755635002C8A5C /* GoogleService-Info.plist in Resources */,
 				CFD4CB682812DF4A00D746B2 /* Assets.xcassets in Resources */,
 				CFD4CB632812DF4000D746B2 /* Main.storyboard in Resources */,
 			);
@@ -473,23 +480,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF2530D428427A5A009570DD /* CategoryEditingViewController.swift in Sources */,
-				CF98A20A28751F53002C8A5C /* VoiceData+CoreDataProperties.swift in Sources */,
+				CF42F98C28756BE100A0591A /* VoiceData+CoreDataProperties.swift in Sources */,
+				CF42F98828756BE100A0591A /* SoineData+CoreDataProperties.swift in Sources */,
 				CF4DA6BA2813B3600084B7E5 /* Utilities.swift in Sources */,
-				CF98A20928751F53002C8A5C /* CategoryData+CoreDataClass.swift in Sources */,
+				CF42F98A28756BE100A0591A /* VoiceData+CoreDataClass.swift in Sources */,
+				CF98A21028755FB1002C8A5C /* TableViewCell_list_ad.swift in Sources */,
+				CF42F98B28756BE100A0591A /* CategoryData+CoreDataProperties.swift in Sources */,
 				CF8F3D4328144A5000A47CF5 /* Extentions.swift in Sources */,
-				CF98A20828751F53002C8A5C /* VoiceData+CoreDataClass.swift in Sources */,
+				CF42F98D28756BE100A0591A /* SoineData+CoreDataClass.swift in Sources */,
 				CFD4CB662812DF4000D746B2 /* soine.xcdatamodeld in Sources */,
-				CF98A20728751F53002C8A5C /* SoineData+CoreDataClass.swift in Sources */,
 				CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */,
 				CFD4CB602812DF4000D746B2 /* ViewController.swift in Sources */,
 				CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */,
 				CFD4CB5C2812DF4000D746B2 /* AppDelegate.swift in Sources */,
 				CF4DA6C02813C7040084B7E5 /* Consts.swift in Sources */,
 				CFD4CB5E2812DF4000D746B2 /* SceneDelegate.swift in Sources */,
-				CF98A20528751F53002C8A5C /* SoineData+CoreDataProperties.swift in Sources */,
-				CF98A20628751F53002C8A5C /* CategoryData+CoreDataProperties.swift in Sources */,
 				CF4DA6C22813D7870084B7E5 /* SoineViewController.swift in Sources */,
 				CF5151AB28438D65002BFF69 /* SettingCategoryViewController.swift in Sources */,
+				CF42F98928756BE100A0591A /* CategoryData+CoreDataClass.swift in Sources */,
 				CF5151AD28439625002BFF69 /* Enums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

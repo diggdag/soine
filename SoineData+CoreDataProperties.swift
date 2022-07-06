@@ -16,6 +16,7 @@ extension SoineData {
         return NSFetchRequest<SoineData>(entityName: "SoineData")
     }
 
+    @NSManaged public var adFlg: Bool
     @NSManaged public var id: Int16
     @NSManaged public var picture: Data?
     @NSManaged public var scale: Float
