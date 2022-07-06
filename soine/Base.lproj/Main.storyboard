@@ -495,14 +495,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xcO-a8-EEC">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Sxe-sx-9Ph"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Sxe-sx-9Ph" firstAttribute="bottom" secondItem="xcO-a8-EEC" secondAttribute="bottom" id="Eua-GM-D8G"/>
+                            <constraint firstItem="Sxe-sx-9Ph" firstAttribute="bottom" secondItem="xcO-a8-EEC" secondAttribute="bottom" constant="100" id="Eua-GM-D8G"/>
                             <constraint firstItem="Sxe-sx-9Ph" firstAttribute="trailing" secondItem="xcO-a8-EEC" secondAttribute="trailing" id="P0r-5f-btv"/>
                             <constraint firstItem="xcO-a8-EEC" firstAttribute="top" secondItem="Sxe-sx-9Ph" secondAttribute="top" id="qJ2-Fa-Zrm"/>
                             <constraint firstItem="xcO-a8-EEC" firstAttribute="leading" secondItem="Sxe-sx-9Ph" secondAttribute="leading" id="yY8-zs-OxN"/>
@@ -551,15 +551,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UcZ-vO-YAw">
-                                <rect key="frame" x="0.0" y="54" width="414" height="34"/>
+                                <rect key="frame" x="20" y="64" width="374" height="34"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hem-Rf-PDw">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="321" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoX-xE-dsr">
-                                        <rect key="frame" x="361" y="0.0" width="53" height="34"/>
+                                        <rect key="frame" x="321" y="0.0" width="53" height="34"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="登録"/>
                                         <connections>
@@ -572,9 +572,9 @@
                         <viewLayoutGuide key="safeArea" id="ymV-XV-gn6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="UcZ-vO-YAw" firstAttribute="leading" secondItem="ymV-XV-gn6" secondAttribute="leading" id="0Y5-rU-ggz"/>
-                            <constraint firstItem="UcZ-vO-YAw" firstAttribute="top" secondItem="ymV-XV-gn6" secondAttribute="top" constant="10" id="7PJ-bi-Dab"/>
-                            <constraint firstItem="ymV-XV-gn6" firstAttribute="trailing" secondItem="UcZ-vO-YAw" secondAttribute="trailing" id="KFK-xY-XLO"/>
+                            <constraint firstItem="UcZ-vO-YAw" firstAttribute="leading" secondItem="ymV-XV-gn6" secondAttribute="leading" constant="20" id="0Y5-rU-ggz"/>
+                            <constraint firstItem="UcZ-vO-YAw" firstAttribute="top" secondItem="ymV-XV-gn6" secondAttribute="top" constant="20" id="7PJ-bi-Dab"/>
+                            <constraint firstItem="ymV-XV-gn6" firstAttribute="trailing" secondItem="UcZ-vO-YAw" secondAttribute="trailing" constant="20" id="KFK-xY-XLO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uTc-Zg-tgd"/>

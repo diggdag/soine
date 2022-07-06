@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
 
 class SettingCategoryViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
@@ -14,6 +15,8 @@ class SettingCategoryViewController: UIViewController {
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
     var editMode:EditMode = .add
+    var bannerView: GADBannerView!
+    var bannerView2: GADBannerView!
     @IBOutlet weak var okBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,18 @@ class SettingCategoryViewController: UIViewController {
                 print("error !!! : \(e)")
             }
         }
+        // In this case, we instantiate the banner with desired ad size.
+        bannerView = GADBannerView(adSize: kGADAdSizeMediumRectangle)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        addBannerViewToView(bannerView)
+        bannerView.load(GADRequest())
+        
+        bannerView2 = GADBannerView(adSize: kGADAdSizeMediumRectangle)
+        bannerView2.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView2.rootViewController = self
+        addBannerViewToView2(bannerView2)
+        bannerView2.load(GADRequest())
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -90,4 +105,44 @@ class SettingCategoryViewController: UIViewController {
         }
         return max_id!
     }
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+          [NSLayoutConstraint(item: bannerView,
+                              attribute: .bottom,
+                              relatedBy: .equal,
+                              toItem: bottomLayoutGuide,
+                              attribute: .top,
+                              multiplier: 1,
+                              constant: 0),
+           NSLayoutConstraint(item: bannerView,
+                              attribute: .centerX,
+                              relatedBy: .equal,
+                              toItem: view,
+                              attribute: .centerX,
+                              multiplier: 1,
+                              constant: 0)
+          ])
+       }
+    func addBannerViewToView2(_ banner: GADBannerView) {
+        banner.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(banner)
+        view.addConstraints(
+          [NSLayoutConstraint(item: banner,
+                              attribute: .bottom,
+                              relatedBy: .equal,
+                              toItem: bannerView,
+                              attribute: .top,
+                              multiplier: 1,
+                              constant: 0),
+           NSLayoutConstraint(item: banner,
+                              attribute: .centerX,
+                              relatedBy: .equal,
+                              toItem: view,
+                              attribute: .centerX,
+                              multiplier: 1,
+                              constant: 0)
+          ])
+       }
 }

@@ -7,17 +7,27 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
 class CategoryEditingViewController:UIViewController{
     var categories:[CategoryData] = []
     var selectedData:CategoryData?
     @IBOutlet weak var tableView: UITableView!
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
+    
+    var bannerView: GADBannerView!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelectionDuringEditing = true
+        
+        // In this case, we instantiate the banner with desired ad size.
+        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        addBannerViewToView(bannerView)
+        bannerView.load(GADRequest())
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -56,6 +66,26 @@ class CategoryEditingViewController:UIViewController{
     @IBAction func toushDown_edit(_ sender: Any) {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+          [NSLayoutConstraint(item: bannerView,
+                              attribute: .bottom,
+                              relatedBy: .equal,
+                              toItem: bottomLayoutGuide,
+                              attribute: .top,
+                              multiplier: 1,
+                              constant: 0),
+           NSLayoutConstraint(item: bannerView,
+                              attribute: .centerX,
+                              relatedBy: .equal,
+                              toItem: view,
+                              attribute: .centerX,
+                              multiplier: 1,
+                              constant: 0)
+          ])
+       }
 }
 ///////////////////////////
 ///extentions

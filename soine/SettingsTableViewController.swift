@@ -13,6 +13,7 @@ import CoreData
 import UniformTypeIdentifiers
 import AVFoundation
 import Toast_Swift
+import GoogleMobileAds
 
 class SettingsTableViewController: UITableViewController{
     var categories:[CategoryData] = []
@@ -40,6 +41,7 @@ class SettingsTableViewController: UITableViewController{
     var selectedRow:Int = 0
     var voiceLoopCount:Int = 1
     
+    var bannerView: GADBannerView!
     
     
     
@@ -68,6 +70,13 @@ class SettingsTableViewController: UITableViewController{
         let backButton = UIBarButtonItem()
         backButton.title = "もどる"
         navigationItem.backBarButtonItem = backButton
+        
+        // In this case, we instantiate the banner with desired ad size.
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        addBannerViewToView(bannerView)
+        bannerView.load(GADRequest())
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -441,6 +450,26 @@ class SettingsTableViewController: UITableViewController{
         }
         return max_id!
     }
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+          [NSLayoutConstraint(item: bannerView,
+                              attribute: .bottom,
+                              relatedBy: .equal,
+                              toItem: bottomLayoutGuide,
+                              attribute: .top,
+                              multiplier: 1,
+                              constant: 0),
+           NSLayoutConstraint(item: bannerView,
+                              attribute: .centerX,
+                              relatedBy: .equal,
+                              toItem: view,
+                              attribute: .centerX,
+                              multiplier: 1,
+                              constant: 0)
+          ])
+       }
 }
 
 ///////////////////////////
