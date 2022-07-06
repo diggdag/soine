@@ -8,6 +8,8 @@
 import UIKit
 import CoreData
 import AVFAudio
+import FirebaseCore
+import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,7 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 予期しない場合
             fatalError("Session有効化失敗")
         }
+        // Use Firebase library to configure APIs.
+        FirebaseApp.configure()
 
+        // Initialize the Google Mobile Ads SDK.
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
     }
 
