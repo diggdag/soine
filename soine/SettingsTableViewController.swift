@@ -224,16 +224,12 @@ class SettingsTableViewController: UITableViewController{
             print("error !!! : \(e)")
         }
         
-        if targetId == nil{
-            //add
-            if (addAd(dataCount: dataCount, adCount: adCount))
-            {
-                save(adFlag: true)//add ad
-            }
+        if (addAd(dataCount: dataCount, adCount: adCount))
+        {
+            save(adFlag: true)//add ad
         }
         save(adFlag: false)
         
-//        self.view.makeToast("ほぞん完了！")
         let screenSizeWidth = UIScreen.main.bounds.width
         let screenSizeHeight = UIScreen.main.bounds.height
         let offsetY = self.tableView.contentOffset.y
@@ -268,11 +264,36 @@ class SettingsTableViewController: UITableViewController{
         if selectedRow != 0 {
             request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[selectedRow - 1].categoryId)
         }
-        //change
+        if adFlag {
+            var rand = Int.random(in: 0...(categories.count - 1))
+            var request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+            request.predicate = NSPredicate(format: "categoryData.categoryId = %d", rand)
+            do {
+                var fetchResults = try viewContext.fetch(request)
+                while true {
+                    if fetchResults.count != 0 {
+                        break
+                    }
+                    else{
+                        print("loop")
+                    }
+                    rand = Int.random(in: 0...(categories.count - 1))
+                    request = SoineData.fetchRequest()
+                    request.predicate = NSPredicate(format: "categoryData.categoryId = %d", rand)
+                    fetchResults = try viewContext.fetch(request)
+                }
+            } catch  let e as NSError{
+                print("error !!! : \(e)")
+            }
+//            rand = Int.random(in: 0...(categories.count - 1))
+            print("rand : \(rand)")
+            request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[rand].categoryId)
+        }
         do {
             let fetchResults = try viewContext.fetch(request)
             let fetchResults_cat = try viewContext.fetch(request_cat)
-            if(fetchResults.count != 0 && targetId != nil){
+            //change
+            if(fetchResults.count != 0 && targetId != nil && !adFlag){
                 change=true
                 for result: AnyObject in fetchResults {
                     let record = result as! SoineData
@@ -303,8 +324,11 @@ class SettingsTableViewController: UITableViewController{
                 }
                 try viewContext.save()
             }
+            
             //add
-            if !change {
+            //ad - add
+            //ad - change
+            if !change || adFlag {
                 let next_id = getNextId()
                 let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
                 let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
@@ -325,7 +349,7 @@ class SettingsTableViewController: UITableViewController{
                 record.voiceLoopCount = Int16(voiceLoopCount)
                 
                 //category
-                if selectedRow == 0 {
+                if selectedRow == 0 && !adFlag{
                     record.categoryData = nil
                 }
                 else{
