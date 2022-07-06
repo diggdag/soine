@@ -26,6 +26,10 @@ class SoineViewController: UIViewController {
         var voice: Data?
 //        var voiceName: String?
         var voiceFileExtention: String?
+        var loopFlag: Bool = true
+        var voiceLoopCount:Int16 = 1
+        
+        
 
         var appDelegate:AppDelegate!
         var viewContext:NSManagedObjectContext!
@@ -50,6 +54,12 @@ class SoineViewController: UIViewController {
                     voice = voiceData?.fileData
 //                        voiceName = result.value(forKey: "voiceName") as? String
                     voiceFileExtention = result.value(forKey: "voiceFileExtention") as? String
+                    if result.value(forKey: "voiceLoopFlg") != nil {
+                        loopFlag = result.value(forKey: "voiceLoopFlg") as! Bool
+                    }
+                    if result.value(forKey: "voiceLoopCount") != nil {
+                        voiceLoopCount = result.value(forKey: "voiceLoopCount") as! Int16
+                    }
                 }
             }
             
@@ -61,8 +71,15 @@ class SoineViewController: UIViewController {
 
             // AVAudioPlayerのデリゲートをセット
             audioPlayer.delegate = self
-
+            
+            print("loop flag : \(loopFlag)")
+            print("loop count : \(voiceLoopCount)")
             // 音声の再生
+            var loopCnt = -1
+            if !loopFlag {
+                loopCnt = Int(voiceLoopCount-1)
+            }
+            audioPlayer.numberOfLoops = loopCnt
             audioPlayer.prepareToPlay()
             audioPlayer.play()
         } catch  let e as NSError{

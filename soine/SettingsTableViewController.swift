@@ -38,7 +38,7 @@ class SettingsTableViewController: UITableViewController{
     var fileExtention:String? = nil
     var fileData:Data? = nil//voice file data
     var selectedRow:Int = 0
-    var voiceInterval:Int = 0
+    var voiceLoopCount:Int = 1
     
     
     
@@ -101,9 +101,9 @@ class SettingsTableViewController: UITableViewController{
                         fileData = soineData.voiceData?.fileData
                         categoryId = soineData.categoryData?.categoryId
                         loopFlag.setOn(soineData.voiceLoopFlg, animated: false)
-                        voiceInterval = Int(soineData.voiceInterval)
-                        intervalLabel.text = "\(voiceInterval)秒"
-                        interval.setValue(Float(voiceInterval), animated: false)
+                        voiceLoopCount = Int(soineData.voiceLoopCount)
+                        intervalLabel.text = "\(voiceLoopCount)回"
+                        interval.setValue(Float(voiceLoopCount), animated: false)
                     }
                 }
             } catch  let e as NSError{
@@ -115,7 +115,7 @@ class SettingsTableViewController: UITableViewController{
                 voiceLabel.text = fileName
                 loopFlag.isEnabled = true
                 loopFlagTitleLabel.isEnabled = true
-                if loopFlag.isOn {
+                if !loopFlag.isOn {
                     interval.isEnabled = true
                     intervalLabel.isEnabled = true
                     intervalTitleLabel.isEnabled = true
@@ -240,7 +240,7 @@ class SettingsTableViewController: UITableViewController{
                     record_voice.id = targetId!
                     record.voiceData = record_voice
                     record.voiceLoopFlg = loopFlag.isOn
-                    record.voiceInterval = Int16(voiceInterval)
+                    record.voiceLoopCount = Int16(voiceLoopCount)
                     
                     //category
                     if selectedRow == 0 {
@@ -272,7 +272,7 @@ class SettingsTableViewController: UITableViewController{
                 record_voice.id = next_id
                 record.voiceData = record_voice
                 record.voiceLoopFlg = loopFlag.isOn
-                record.voiceInterval = Int16(voiceInterval)
+                record.voiceLoopCount = Int16(voiceLoopCount)
                 
                 //category
                 if selectedRow == 0 {
@@ -303,17 +303,17 @@ class SettingsTableViewController: UITableViewController{
     }
     @IBAction func valueChanged_loopFlg(_ sender: Any) {
         interval.setNeedsLayout()
-        interval.isEnabled = loopFlag.isOn
-        intervalLabel.isEnabled = loopFlag.isOn
-        intervalTitleLabel.isEnabled = loopFlag.isOn
+        interval.isEnabled = !loopFlag.isOn
+        intervalLabel.isEnabled = !loopFlag.isOn
+        intervalTitleLabel.isEnabled = !loopFlag.isOn
         
 //        let indexPath = IndexPath(row: 5, section: 0)
 //        tableView.reloadRows(at: [indexPath], with: .none)
     }
     @IBAction func valueChanged_interval(_ sender: Any) {
         print("interval value : \(interval.value)")
-        voiceInterval = Int(round(interval.value))
-        intervalLabel.text = "\(voiceInterval)秒"
+        voiceLoopCount = Int(round(interval.value))
+        intervalLabel.text = "\(voiceLoopCount)回"
 //        interval.setValue(v, animated: false)
     }
 //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -437,12 +437,9 @@ extension SettingsTableViewController:UIDocumentPickerDelegate{
             }
             voiceLabel.text = fileName
             
+            //enable change
             loopFlag.isEnabled = true
             loopFlagTitleLabel.isEnabled = true
-            
-            interval.isEnabled = true
-            intervalLabel.isEnabled = true
-            intervalTitleLabel.isEnabled = true
             
             let indexPath = IndexPath(row: 2, section: 0)
             tableView.reloadRows(at: [indexPath], with: .none)

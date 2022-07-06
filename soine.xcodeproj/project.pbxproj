@@ -18,13 +18,13 @@
 		CF4DA6C22813D7870084B7E5 /* SoineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4DA6C12813D7870084B7E5 /* SoineViewController.swift */; };
 		CF5151AB28438D65002BFF69 /* SettingCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5151AA28438D65002BFF69 /* SettingCategoryViewController.swift */; };
 		CF5151AD28439625002BFF69 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5151AC28439625002BFF69 /* Enums.swift */; };
-		CF6F2D4F2871D5880045748D /* VoiceData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2D492871D5870045748D /* VoiceData+CoreDataClass.swift */; };
-		CF6F2D502871D5880045748D /* VoiceData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2D4A2871D5870045748D /* VoiceData+CoreDataProperties.swift */; };
-		CF6F2D512871D5880045748D /* CategoryData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2D4B2871D5880045748D /* CategoryData+CoreDataProperties.swift */; };
-		CF6F2D522871D5880045748D /* SoineData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2D4C2871D5880045748D /* SoineData+CoreDataClass.swift */; };
-		CF6F2D532871D5880045748D /* CategoryData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2D4D2871D5880045748D /* CategoryData+CoreDataClass.swift */; };
-		CF6F2D542871D5880045748D /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6F2D4E2871D5880045748D /* SoineData+CoreDataProperties.swift */; };
 		CF8F3D4328144A5000A47CF5 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8F3D4228144A5000A47CF5 /* Extentions.swift */; };
+		CF98A20528751F53002C8A5C /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A1FF28751F53002C8A5C /* SoineData+CoreDataProperties.swift */; };
+		CF98A20628751F53002C8A5C /* CategoryData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20028751F53002C8A5C /* CategoryData+CoreDataProperties.swift */; };
+		CF98A20728751F53002C8A5C /* SoineData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20128751F53002C8A5C /* SoineData+CoreDataClass.swift */; };
+		CF98A20828751F53002C8A5C /* VoiceData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20228751F53002C8A5C /* VoiceData+CoreDataClass.swift */; };
+		CF98A20928751F53002C8A5C /* CategoryData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20328751F53002C8A5C /* CategoryData+CoreDataClass.swift */; };
+		CF98A20A28751F53002C8A5C /* VoiceData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20428751F53002C8A5C /* VoiceData+CoreDataProperties.swift */; };
 		CFD4CB5C2812DF4000D746B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5B2812DF4000D746B2 /* AppDelegate.swift */; };
 		CFD4CB5E2812DF4000D746B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5D2812DF4000D746B2 /* SceneDelegate.swift */; };
 		CFD4CB602812DF4000D746B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5F2812DF4000D746B2 /* ViewController.swift */; };
@@ -87,13 +87,13 @@
 		CF4DA6C12813D7870084B7E5 /* SoineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoineViewController.swift; sourceTree = "<group>"; };
 		CF5151AA28438D65002BFF69 /* SettingCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCategoryViewController.swift; sourceTree = "<group>"; };
 		CF5151AC28439625002BFF69 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		CF6F2D492871D5870045748D /* VoiceData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VoiceData+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CF6F2D4A2871D5870045748D /* VoiceData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VoiceData+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CF6F2D4B2871D5880045748D /* CategoryData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryData+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CF6F2D4C2871D5880045748D /* SoineData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CF6F2D4D2871D5880045748D /* CategoryData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryData+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CF6F2D4E2871D5880045748D /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CF8F3D4228144A5000A47CF5 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		CF98A1FF28751F53002C8A5C /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF98A20028751F53002C8A5C /* CategoryData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF98A20128751F53002C8A5C /* SoineData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF98A20228751F53002C8A5C /* VoiceData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VoiceData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF98A20328751F53002C8A5C /* CategoryData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF98A20428751F53002C8A5C /* VoiceData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VoiceData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CFD4CB582812DF4000D746B2 /* soine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD4CB5B2812DF4000D746B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFD4CB5D2812DF4000D746B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,12 +166,12 @@
 		CFD4CB4F2812DF4000D746B2 = {
 			isa = PBXGroup;
 			children = (
-				CF6F2D4D2871D5880045748D /* CategoryData+CoreDataClass.swift */,
-				CF6F2D4B2871D5880045748D /* CategoryData+CoreDataProperties.swift */,
-				CF6F2D4C2871D5880045748D /* SoineData+CoreDataClass.swift */,
-				CF6F2D4E2871D5880045748D /* SoineData+CoreDataProperties.swift */,
-				CF6F2D492871D5870045748D /* VoiceData+CoreDataClass.swift */,
-				CF6F2D4A2871D5870045748D /* VoiceData+CoreDataProperties.swift */,
+				CF98A20228751F53002C8A5C /* VoiceData+CoreDataClass.swift */,
+				CF98A20428751F53002C8A5C /* VoiceData+CoreDataProperties.swift */,
+				CF98A20128751F53002C8A5C /* SoineData+CoreDataClass.swift */,
+				CF98A1FF28751F53002C8A5C /* SoineData+CoreDataProperties.swift */,
+				CF98A20328751F53002C8A5C /* CategoryData+CoreDataClass.swift */,
+				CF98A20028751F53002C8A5C /* CategoryData+CoreDataProperties.swift */,
 				CFD4CB5A2812DF4000D746B2 /* soine */,
 				CFD4CB742812DF4A00D746B2 /* soineTests */,
 				CFD4CB7E2812DF4A00D746B2 /* soineUITests */,
@@ -472,22 +472,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF6F2D522871D5880045748D /* SoineData+CoreDataClass.swift in Sources */,
 				CF2530D428427A5A009570DD /* CategoryEditingViewController.swift in Sources */,
-				CF6F2D532871D5880045748D /* CategoryData+CoreDataClass.swift in Sources */,
+				CF98A20A28751F53002C8A5C /* VoiceData+CoreDataProperties.swift in Sources */,
 				CF4DA6BA2813B3600084B7E5 /* Utilities.swift in Sources */,
-				CF6F2D502871D5880045748D /* VoiceData+CoreDataProperties.swift in Sources */,
-				CF6F2D512871D5880045748D /* CategoryData+CoreDataProperties.swift in Sources */,
+				CF98A20928751F53002C8A5C /* CategoryData+CoreDataClass.swift in Sources */,
 				CF8F3D4328144A5000A47CF5 /* Extentions.swift in Sources */,
+				CF98A20828751F53002C8A5C /* VoiceData+CoreDataClass.swift in Sources */,
 				CFD4CB662812DF4000D746B2 /* soine.xcdatamodeld in Sources */,
+				CF98A20728751F53002C8A5C /* SoineData+CoreDataClass.swift in Sources */,
 				CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */,
 				CFD4CB602812DF4000D746B2 /* ViewController.swift in Sources */,
-				CF6F2D542871D5880045748D /* SoineData+CoreDataProperties.swift in Sources */,
 				CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */,
 				CFD4CB5C2812DF4000D746B2 /* AppDelegate.swift in Sources */,
 				CF4DA6C02813C7040084B7E5 /* Consts.swift in Sources */,
 				CFD4CB5E2812DF4000D746B2 /* SceneDelegate.swift in Sources */,
-				CF6F2D4F2871D5880045748D /* VoiceData+CoreDataClass.swift in Sources */,
+				CF98A20528751F53002C8A5C /* SoineData+CoreDataProperties.swift in Sources */,
+				CF98A20628751F53002C8A5C /* CategoryData+CoreDataProperties.swift in Sources */,
 				CF4DA6C22813D7870084B7E5 /* SoineViewController.swift in Sources */,
 				CF5151AB28438D65002BFF69 /* SettingCategoryViewController.swift in Sources */,
 				CF5151AD28439625002BFF69 /* Enums.swift in Sources */,

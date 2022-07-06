@@ -2,7 +2,7 @@
 //  VoiceData+CoreDataClass.swift
 //  
 //
-//  Created by 倉知諒 on 2022/07/03.
+//  Created by 倉知諒 on 2022/07/06.
 //
 //
 
