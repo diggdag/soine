@@ -53,8 +53,9 @@ class ViewController: UIViewController {
         navigationItem.backBarButtonItem = backButton
         
         // In this case, we instantiate the banner with desired ad size.
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        bannerView.adUnitID = "ca-app-pub-5418872710464793/4324956840"
         bannerView.rootViewController = self
         addBannerViewToView(bannerView)
         bannerView.load(GADRequest())
@@ -194,6 +195,8 @@ extension ViewController:UITableViewDataSource{
         if soineData.adFlg {
             let cell: TableViewCell_list_ad = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list_ad") as! TableViewCell_list_ad
             cell.setCell(unitId: "ca-app-pub-3940256099942544/2934735716", rootViewController: self)
+//            cell.setCell(unitId: "ca-app-pub-5418872710464793/1165352137", rootViewController: self)
+            
 //            let bannerViewCell:GADBannerView!
 //
 //            bannerViewCell = GADBannerView(adSize: kGADAdSizeLargeBanner)
@@ -206,6 +209,7 @@ extension ViewController:UITableViewDataSource{
         let cell: TableViewCell_list = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list") as! TableViewCell_list
         let image:UIImage = soineData.picture == nil ? UIImage() : UIImage(data: soineData.picture!)!
         let voiceName: String = soineData.voiceName == nil ? "" : soineData.voiceName!
+//        let categoryId: String = soineData.categoryData == nil ? "" : String(soineData.categoryData!.categoryId)
         cell.setCell(data: Data_list(
             voiceName: "\(voiceName)", category: image, scale: CGFloat(soineData.scale)))//\(String(soineData.id)):
         cell.backgroundColor = UIColor.clear
