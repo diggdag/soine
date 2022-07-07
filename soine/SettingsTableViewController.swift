@@ -265,36 +265,43 @@ class SettingsTableViewController: UITableViewController{
             request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[selectedRow - 1].categoryId)
         }
         if adFlag {
-            var rand = Int.random(in: 0...(categories.count - 1))
-            var request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-            request.predicate = NSPredicate(format: "categoryData.categoryId = %d", categories[rand].categoryId)
+            //広告を入れるカテゴリをランダムに決定する
+            var rand = 0
+            
             do {
-                var fetchResults = try viewContext.fetch(request)
-                var upper = 10//フェールセーフ
-                while upper > 0 {
+                //フェールセーフ
+                var limit = 30//ランダム値取得制限（データが存在しない）
+                var limit_notExistAd = 10//ランダム値取得制限（広告が存在する）
+                while limit > 0 && limit_notExistAd > 0{
+                    rand = Int.random(in: 0...(categories.count - 1))
+                    let request = SoineData.fetchRequest()
+                    request.predicate = NSPredicate(format: "categoryData.categoryId = %d", categories[rand].categoryId)
+                    let fetchResults = try viewContext.fetch(request)
+                    //データが存在するカテゴリを対象にする
                     if fetchResults.count != 0 {
                         let request2: NSFetchRequest<SoineData> = SoineData.fetchRequest()
                         request2.predicate = NSPredicate(format: "categoryData.categoryId = %d and adFlg = true", categories[rand].categoryId)
                         let fetchResults2 = try viewContext.fetch(request2)
+                        //広告が存在しないカテゴリを対象にする
                         if fetchResults2.count == 0 {
                             break
                         }
+                        //なければupperを減らして最終的なランダム値が採用される（広告が存在する）
                         else{
-                            print("loop - rand : \(rand)")
-                            upper = upper - 1
+                            print("loop not exist ad - rand : \(rand)")
+                            limit_notExistAd = limit_notExistAd - 1
                         }
                     }
                     else{
                         print("loop - rand : \(rand)")
-                        upper = upper - 1
+                        limit = limit - 1
                     }
-                    rand = Int.random(in: 0...(categories.count - 1))
-                    request = SoineData.fetchRequest()
-                    request.predicate = NSPredicate(format: "categoryData.categoryId = %d", categories[rand].categoryId)
-                    fetchResults = try viewContext.fetch(request)
                 }
-                if upper <= 0 {
+                if limit <= 0 {
                     print("ループ上限")
+                }
+                if limit_notExistAd <= 0 {
+                    print("ループ上限　adなし")
                 }
             } catch  let e as NSError{
                 print("error !!! : \(e)")
