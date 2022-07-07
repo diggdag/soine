@@ -267,20 +267,34 @@ class SettingsTableViewController: UITableViewController{
         if adFlag {
             var rand = Int.random(in: 0...(categories.count - 1))
             var request: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-            request.predicate = NSPredicate(format: "categoryData.categoryId = %d", rand)
+            request.predicate = NSPredicate(format: "categoryData.categoryId = %d", categories[rand].categoryId)
             do {
                 var fetchResults = try viewContext.fetch(request)
-                while true {
+                var upper = 10//フェールセーフ
+                while upper > 0 {
                     if fetchResults.count != 0 {
-                        break
+                        let request2: NSFetchRequest<SoineData> = SoineData.fetchRequest()
+                        request2.predicate = NSPredicate(format: "categoryData.categoryId = %d and adFlg = true", categories[rand].categoryId)
+                        let fetchResults2 = try viewContext.fetch(request2)
+                        if fetchResults2.count == 0 {
+                            break
+                        }
+                        else{
+                            print("loop - rand : \(rand)")
+                            upper = upper - 1
+                        }
                     }
                     else{
-                        print("loop")
+                        print("loop - rand : \(rand)")
+                        upper = upper - 1
                     }
                     rand = Int.random(in: 0...(categories.count - 1))
                     request = SoineData.fetchRequest()
-                    request.predicate = NSPredicate(format: "categoryData.categoryId = %d", rand)
+                    request.predicate = NSPredicate(format: "categoryData.categoryId = %d", categories[rand].categoryId)
                     fetchResults = try viewContext.fetch(request)
+                }
+                if upper <= 0 {
+                    print("ループ上限")
                 }
             } catch  let e as NSError{
                 print("error !!! : \(e)")
