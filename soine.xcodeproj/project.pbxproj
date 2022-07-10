@@ -215,9 +215,9 @@
 				CF5151AC28439625002BFF69 /* Enums.swift */,
 				CFD4CB612812DF4000D746B2 /* Main.storyboard */,
 				CFD4CB672812DF4A00D746B2 /* Assets.xcassets */,
+				CF98A20D28755635002C8A5C /* GoogleService-Info.plist */,
 				CFD4CB692812DF4A00D746B2 /* LaunchScreen.storyboard */,
 				CFD4CB6C2812DF4A00D746B2 /* Info.plist */,
-				CF98A20D28755635002C8A5C /* GoogleService-Info.plist */,
 				CFD4CB642812DF4000D746B2 /* soine.xcdatamodeld */,
 				CFA75EAA2876ABA600EA0B53 /* InfoPlist.strings */,
 			);

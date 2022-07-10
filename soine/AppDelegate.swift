@@ -42,16 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Initialize the Google Mobile Ads SDK.
 //        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        if #available(iOS 14, *) {
-            if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
-                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                    GADMobileAds.sharedInstance().start(completionHandler: nil)
-                })
-            }
-        } else {
-            // Fallback on earlier versions
-            GADMobileAds.sharedInstance().start(completionHandler: nil)
-        }
         return true
     }
 
@@ -68,9 +58,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-    }
+//    func applicationDidBecomeActive(_ application: UIApplication) {
+//        if #available(iOS 14, *) {
+//            if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
+//                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+//                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+//                })
+//            }
+//        } else {
+//            // Fallback on earlier versions
+//            GADMobileAds.sharedInstance().start(completionHandler: nil)
+//        }
+//        }
+//    func applicationDidBecomeActive(_ application: UIApplication) {
+//    }
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {

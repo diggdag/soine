@@ -10,6 +10,7 @@ import Photos
 import CoreData
 import Toast_Swift
 import GoogleMobileAds
+import AppTrackingTransparency
 
 class ViewController: UIViewController {
     
@@ -53,13 +54,14 @@ class ViewController: UIViewController {
         navigationItem.backBarButtonItem = backButton
         
         // In this case, we instantiate the banner with desired ad size.
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"//test ad
-        bannerView.adUnitID = "ca-app-pub-5418872710464793/4324956840"
-        bannerView.rootViewController = self
-        addBannerViewToView(bannerView)
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [Consts.ADMOB_TEST_DEVICE_ID,Consts.ADMOB_TEST_DEVICE_ID_SE2]
-        bannerView.load(GADRequest())
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.myEvent),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+        settingAd()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,6 +69,34 @@ class ViewController: UIViewController {
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         viewContext = appDelegate.persistentContainer.viewContext
         refrechData()
+        
+    }
+    @objc func myEvent() {
+        if #available(iOS 14, *) {
+            if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+//                    self.settingAd()
+                })
+            }
+//            else{
+//                settingAd()
+//            }
+        }
+        else {
+            // Fallback on earlier versions
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
+//            settingAd()
+        }
+    }
+    func settingAd() {
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"//test ad
+        bannerView.adUnitID = "ca-app-pub-5418872710464793/4324956840"
+        bannerView.rootViewController = self
+        addBannerViewToView(bannerView)
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [Consts.ADMOB_TEST_DEVICE_ID,Consts.ADMOB_TEST_DEVICE_ID_SE2]
+        bannerView.load(GADRequest())
     }
     func refrechData() {
         updateIsNonCategorize()
