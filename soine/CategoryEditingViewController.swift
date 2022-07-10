@@ -86,6 +86,9 @@ class CategoryEditingViewController:UIViewController{
                               constant: 0)
           ])
        }
+    @IBAction func touchDown_add(_ sender: Any) {
+        selectedData = nil
+    }
 }
 ///////////////////////////
 ///extentions
