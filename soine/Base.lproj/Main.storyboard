@@ -17,15 +17,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsL-un-fR9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ubc-XB-X9Q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="CsL-un-fR9" secondAttribute="bottom" id="I1g-2Y-pvw"/>
-                            <constraint firstItem="CsL-un-fR9" firstAttribute="top" secondItem="S3m-U6-EHa" secondAttribute="top" id="uyp-Zj-8pv"/>
+                            <constraint firstItem="CsL-un-fR9" firstAttribute="top" secondItem="Ubc-XB-X9Q" secondAttribute="top" id="hWj-b4-iM0"/>
+                            <constraint firstItem="Ubc-XB-X9Q" firstAttribute="bottom" secondItem="CsL-un-fR9" secondAttribute="bottom" id="tlp-26-Xq3"/>
                             <constraint firstItem="CsL-un-fR9" firstAttribute="leading" secondItem="Ubc-XB-X9Q" secondAttribute="leading" id="w6A-3G-2A5"/>
                             <constraint firstItem="Ubc-XB-X9Q" firstAttribute="trailing" secondItem="CsL-un-fR9" secondAttribute="trailing" id="wUA-SC-44A"/>
                         </constraints>
@@ -33,6 +33,7 @@
                     <navigationItem key="navigationItem" id="7gs-B6-7uV"/>
                     <connections>
                         <outlet property="imageView" destination="CsL-un-fR9" id="tka-gy-bcy"/>
+                        <outlet property="top_constraint" destination="hWj-b4-iM0" id="JjE-F3-U6w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ol0-fq-9wl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -412,7 +413,7 @@
                                         <rect key="frame" x="0.0" y="924.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9F0-Ee-mKc" id="51c-W1-R7f">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="アプリバージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y2W-nU-cE8">
@@ -423,7 +424,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xHt-fN-rHg">
-                                                    <rect key="frame" x="362" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="323" y="12" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
@@ -436,11 +437,11 @@
                                         <rect key="frame" x="0.0" y="968" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bvQ-YF-rs4" id="9oE-gJ-cdQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="ライセンス" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gkz-78-y7F">
-                                                    <rect key="frame" x="8" y="0.0" width="398" height="43.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>

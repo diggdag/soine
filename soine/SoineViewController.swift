@@ -16,11 +16,13 @@ class SoineViewController: UIViewController {
     var viewContext:NSManagedObjectContext!
     var audioPlayer:AVAudioPlayer!
     var targetId:Int16 = 0
+    @IBOutlet weak var top_constraint: NSLayoutConstraint!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("-------------- SoineViewController viewDidLoad --------------")
+        
         var image:UIImage? = nil
         var scale:CGFloat = CGFloat(1)
         var voice: Data?
@@ -85,6 +87,15 @@ class SoineViewController: UIViewController {
         } catch  let e as NSError{
             print("error !!! : \(e)")
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        //constraint変更
+        top_constraint.constant = top_constraint.constant - navigationBarHeight
+        UIView.animate(withDuration: 0.5, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 //    override var prefersStatusBarHidden: Bool {
 //        return true
