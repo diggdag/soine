@@ -24,10 +24,10 @@
                         <viewLayoutGuide key="safeArea" id="Ubc-XB-X9Q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="CsL-un-fR9" firstAttribute="top" secondItem="S3m-U6-EHa" secondAttribute="top" id="6sz-Wo-Oa5"/>
+                            <constraint firstAttribute="bottom" secondItem="CsL-un-fR9" secondAttribute="bottom" id="I1g-2Y-pvw"/>
+                            <constraint firstItem="CsL-un-fR9" firstAttribute="top" secondItem="S3m-U6-EHa" secondAttribute="top" id="uyp-Zj-8pv"/>
                             <constraint firstItem="CsL-un-fR9" firstAttribute="leading" secondItem="Ubc-XB-X9Q" secondAttribute="leading" id="w6A-3G-2A5"/>
                             <constraint firstItem="Ubc-XB-X9Q" firstAttribute="trailing" secondItem="CsL-un-fR9" secondAttribute="trailing" id="wUA-SC-44A"/>
-                            <constraint firstAttribute="bottom" secondItem="CsL-un-fR9" secondAttribute="bottom" id="xgO-Rc-jec"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7gs-B6-7uV"/>
@@ -37,7 +37,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ol0-fq-9wl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="170" y="905"/>
+            <point key="canvasLocation" x="169.56521739130437" y="904.6875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aot-F8-zoe">
@@ -64,7 +64,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="nS4-Z0-IxZ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="674"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCell_list" rowHeight="86" id="P2w-Qx-OjQ" customClass="TableViewCell_list" customModule="soine" customModuleProvider="target">
@@ -155,7 +155,7 @@
                             <constraint firstItem="0Td-EV-hPc" firstAttribute="trailing" secondItem="nS4-Z0-IxZ" secondAttribute="trailing" id="g3I-iM-DHy"/>
                             <constraint firstItem="nS4-Z0-IxZ" firstAttribute="leading" secondItem="0Td-EV-hPc" secondAttribute="leading" id="i7S-df-HD1"/>
                             <constraint firstItem="nS4-Z0-IxZ" firstAttribute="top" secondItem="0Td-EV-hPc" secondAttribute="top" id="nkp-z1-nMb"/>
-                            <constraint firstItem="0Td-EV-hPc" firstAttribute="bottom" secondItem="nS4-Z0-IxZ" secondAttribute="bottom" constant="100" id="tOB-zu-Rah"/>
+                            <constraint firstItem="0Td-EV-hPc" firstAttribute="bottom" secondItem="nS4-Z0-IxZ" secondAttribute="bottom" constant="50" id="tOB-zu-Rah"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VMv-dK-QwS">
@@ -486,7 +486,7 @@
             </objects>
             <point key="canvasLocation" x="186.95652173913044" y="209.59821428571428"/>
         </scene>
-        <!--Category Editing View Controller-->
+        <!--カテゴリー-->
         <scene sceneID="RBc-o4-sXl">
             <objects>
                 <viewController id="YAd-K7-735" customClass="CategoryEditingViewController" customModule="soine" customModuleProvider="target" sceneMemberID="viewController">
@@ -508,7 +508,7 @@
                             <constraint firstItem="xcO-a8-EEC" firstAttribute="leading" secondItem="Sxe-sx-9Ph" secondAttribute="leading" id="yY8-zs-OxN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="gSN-GD-A2D">
+                    <navigationItem key="navigationItem" title="カテゴリー" id="gSN-GD-A2D">
                         <rightBarButtonItems>
                             <barButtonItem style="plain" id="mzu-da-6xu">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="qGg-mL-Sft">
@@ -517,6 +517,7 @@
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="plus.circle" catalog="system"/>
                                     <connections>
+                                        <action selector="touchDown_add:" destination="YAd-K7-735" eventType="touchDown" id="6u4-px-x4a"/>
                                         <segue destination="anT-2a-kFc" kind="presentation" identifier="toCategorySetting" id="8uc-ru-gTS"/>
                                     </connections>
                                 </button>

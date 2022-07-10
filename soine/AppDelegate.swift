@@ -10,6 +10,8 @@ import CoreData
 import AVFAudio
 import FirebaseCore
 import GoogleMobileAds
+import AppTrackingTransparency
+import AdSupport
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,7 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         // Initialize the Google Mobile Ads SDK.
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+//        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        if #available(iOS 14, *) {
+            if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+                })
+            }
+        } else {
+            // Fallback on earlier versions
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
+        }
         return true
     }
 
@@ -57,6 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func applicationDidBecomeActive(_ application: UIApplication) {
+    }
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {

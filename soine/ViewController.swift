@@ -53,11 +53,12 @@ class ViewController: UIViewController {
         navigationItem.backBarButtonItem = backButton
         
         // In this case, we instantiate the banner with desired ad size.
-        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-//        bannerView.adUnitID = "ca-app-pub-5418872710464793/4324956840"
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"//test ad
+        bannerView.adUnitID = "ca-app-pub-5418872710464793/4324956840"
         bannerView.rootViewController = self
         addBannerViewToView(bannerView)
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [Consts.ADMOB_TEST_DEVICE_ID,Consts.ADMOB_TEST_DEVICE_ID_SE2]
         bannerView.load(GADRequest())
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -194,8 +195,8 @@ extension ViewController:UITableViewDataSource{
         let soineData: SoineData = datas[indexPath.section][indexPath.row]
         if soineData.adFlg {
             let cell: TableViewCell_list_ad = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list_ad") as! TableViewCell_list_ad
-            cell.setCell(unitId: "ca-app-pub-3940256099942544/2934735716", rootViewController: self)
-//            cell.setCell(unitId: "ca-app-pub-5418872710464793/1165352137", rootViewController: self)
+//            cell.setCell(unitId: "ca-app-pub-3940256099942544/2934735716", rootViewController: self)
+            cell.setCell(unitId: "ca-app-pub-5418872710464793/1165352137", rootViewController: self)
             
 //            let bannerViewCell:GADBannerView!
 //

@@ -27,6 +27,7 @@
 		CF8F3D4328144A5000A47CF5 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8F3D4228144A5000A47CF5 /* Extentions.swift */; };
 		CF98A20E28755635002C8A5C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF98A20D28755635002C8A5C /* GoogleService-Info.plist */; };
 		CF98A21028755FB1002C8A5C /* TableViewCell_list_ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98A20F28755FB1002C8A5C /* TableViewCell_list_ad.swift */; };
+		CFA75EAB2876ABA600EA0B53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CFA75EAA2876ABA600EA0B53 /* InfoPlist.strings */; };
 		CFD4CB5C2812DF4000D746B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5B2812DF4000D746B2 /* AppDelegate.swift */; };
 		CFD4CB5E2812DF4000D746B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5D2812DF4000D746B2 /* SceneDelegate.swift */; };
 		CFD4CB602812DF4000D746B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB5F2812DF4000D746B2 /* ViewController.swift */; };
@@ -98,6 +99,7 @@
 		CF8F3D4228144A5000A47CF5 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		CF98A20D28755635002C8A5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CF98A20F28755FB1002C8A5C /* TableViewCell_list_ad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell_list_ad.swift; sourceTree = "<group>"; };
+		CFA75EAA2876ABA600EA0B53 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		CFD4CB582812DF4000D746B2 /* soine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD4CB5B2812DF4000D746B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFD4CB5D2812DF4000D746B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				CFD4CB6C2812DF4A00D746B2 /* Info.plist */,
 				CF98A20D28755635002C8A5C /* GoogleService-Info.plist */,
 				CFD4CB642812DF4000D746B2 /* soine.xcdatamodeld */,
+				CFA75EAA2876ABA600EA0B53 /* InfoPlist.strings */,
 			);
 			path = soine;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				CF98A20E28755635002C8A5C /* GoogleService-Info.plist in Resources */,
 				CFD4CB682812DF4A00D746B2 /* Assets.xcassets in Resources */,
 				CFD4CB632812DF4000D746B2 /* Main.storyboard in Resources */,
+				CFA75EAB2876ABA600EA0B53 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +683,7 @@
 				DEVELOPMENT_TEAM = 7H3WV46MCH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = soine/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ボイス";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "use the photo library's photo as a background image in this app";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -709,6 +714,7 @@
 				DEVELOPMENT_TEAM = 7H3WV46MCH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = soine/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ボイス";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "use the photo library's photo as a background image in this app";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
