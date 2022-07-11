@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		24EAF3723A7F35BFCA1C1229 /* Pods_soineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8981182054219BFC14E4B428 /* Pods_soineTests.framework */; };
 		4E2B583453DE95A491EAAF8C /* Pods_soine_soineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7FE51060977A5E0C9FBAFE /* Pods_soine_soineUITests.framework */; };
+		CF0C3677287C61A70047FF72 /* CategoryDataDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0C3676287C61A70047FF72 /* CategoryDataDisplay.swift */; };
 		CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */; };
 		CF2530D428427A5A009570DD /* CategoryEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2530D328427A5A009570DD /* CategoryEditingViewController.swift */; };
 		CF42F98828756BE100A0591A /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF42F98228756BE100A0591A /* SoineData+CoreDataProperties.swift */; };
@@ -80,6 +81,7 @@
 		8981182054219BFC14E4B428 /* Pods_soineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_soineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD1CB473C474C49A297E714 /* Pods-soine-soineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soine-soineUITests.release.xcconfig"; path = "Target Support Files/Pods-soine-soineUITests/Pods-soine-soineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE65AD748C9251F6F308D146 /* Pods-soineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soineTests.debug.xcconfig"; path = "Target Support Files/Pods-soineTests/Pods-soineTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CF0C3676287C61A70047FF72 /* CategoryDataDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataDisplay.swift; sourceTree = "<group>"; };
 		CF0FA1A2281D6AA70089586D /* TableViewCell_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell_list.swift; sourceTree = "<group>"; };
 		CF2530D328427A5A009570DD /* CategoryEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditingViewController.swift; sourceTree = "<group>"; };
 		CF42F98228756BE100A0591A /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				CF4DA6BF2813C7040084B7E5 /* Consts.swift */,
 				CF8F3D4228144A5000A47CF5 /* Extentions.swift */,
 				CF5151AC28439625002BFF69 /* Enums.swift */,
+				CF0C3676287C61A70047FF72 /* CategoryDataDisplay.swift */,
 				CFD4CB612812DF4000D746B2 /* Main.storyboard */,
 				CFD4CB672812DF4A00D746B2 /* Assets.xcassets */,
 				CF98A20D28755635002C8A5C /* GoogleService-Info.plist */,
@@ -491,6 +494,7 @@
 				CF98A21028755FB1002C8A5C /* TableViewCell_list_ad.swift in Sources */,
 				CF42F98B28756BE100A0591A /* CategoryData+CoreDataProperties.swift in Sources */,
 				CF8F3D4328144A5000A47CF5 /* Extentions.swift in Sources */,
+				CF0C3677287C61A70047FF72 /* CategoryDataDisplay.swift in Sources */,
 				CF42F98D28756BE100A0591A /* SoineData+CoreDataClass.swift in Sources */,
 				CFD4CB662812DF4000D746B2 /* soine.xcdatamodeld in Sources */,
 				CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */,

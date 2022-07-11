@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var datas: [[SoineData]] = []
 //    var categories:[CategoryData] = []
-    var sections: [String] = []
+    var sections: [CategoryDataDisplay] = []
     var selectedData:SoineData?
     
     var appDelegate:AppDelegate!
@@ -119,7 +119,7 @@ class ViewController: UIViewController {
                 let soineData = result as! SoineData
                 var insert = false
                 for i in 0 ..< loopCnt {
-                    if soineData.categoryData?.name == sections[i] {
+                    if soineData.categoryData?.categoryId == sections[i].categoryId {
                         datas[i].append(soineData)
                         insert = true
                     }
@@ -145,11 +145,11 @@ class ViewController: UIViewController {
             for result: AnyObject in fetchResults {
                 let categoryData = result as! CategoryData
                 if categoryData.soineData != nil && categoryData.soineData!.count != 0 {
-                    sections.append(categoryData.name!)
+                    sections.append(CategoryDataDisplay(_categoryId: categoryData.categoryId, _name: categoryData.name!))
                 }
             }
             if existNonCategorize {
-                sections.append("ほか")
+                sections.append(CategoryDataDisplay(_categoryId: nil, _name: "ほか"))
             }
         } catch let e as NSError{
             print("error !!! : \(e)")
@@ -269,7 +269,8 @@ extension ViewController:UITableViewDataSource{
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         var rtn :[String] = []
         for sec in sections {
-            rtn.append(String(sec.prefix(3)))
+//            rtn.append(String(sec.name?.prefix(3)))
+            rtn.append(String(sec.name!.prefix(3)))
         }
         return rtn
     }
@@ -277,7 +278,7 @@ extension ViewController:UITableViewDataSource{
         return index
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+        return sections[section].name
     }
 }
 extension ViewController:UITableViewDelegate{
