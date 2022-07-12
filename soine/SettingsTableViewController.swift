@@ -441,7 +441,7 @@ class SettingsTableViewController: UITableViewController{
     func requestAuthorizationOn(){
         var status:PHAuthorizationStatus
         if #available(iOS 14, *) {
-            let accessLebel:PHAccessLevel = .addOnly
+            let accessLebel:PHAccessLevel = .readWrite
             status = PHPhotoLibrary.authorizationStatus(for: accessLebel)
         } else {
             // Fallback on earlier versions

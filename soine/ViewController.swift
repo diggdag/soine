@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         
         //写真アクセス許可
         if #available(iOS 14, *) {
-            let accessLebel:PHAccessLevel = .addOnly
+            let accessLebel:PHAccessLevel = .readWrite
             PHPhotoLibrary.requestAuthorization(for: accessLebel){status in
                 DispatchQueue.main.async() {
                 }
