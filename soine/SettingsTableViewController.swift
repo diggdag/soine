@@ -265,7 +265,7 @@ class SettingsTableViewController: UITableViewController{
         if selectedRow != 0 {
             request_cat.predicate = NSPredicate(format: "categoryId = %d", categories[selectedRow - 1].categoryId)
         }
-        if adFlag {
+        if adFlag && categories.count != 0 {
             //広告を入れるカテゴリをランダムに決定する
             var rand = 0
             
@@ -371,11 +371,15 @@ class SettingsTableViewController: UITableViewController{
                 record.voiceLoopCount = Int16(voiceLoopCount)
                 
                 //category
-                if selectedRow == 0 && !adFlag{
+                //新規かつ広告でない
+                if selectedRow == 0 && !adFlag {
                     record.categoryData = nil
                 }
-                else{
+                else if categories.count != 0 {
                     record.categoryData = fetchResults_cat[0]
+                }
+                else{
+                    record.categoryData = nil
                 }
                 
                 //ad
