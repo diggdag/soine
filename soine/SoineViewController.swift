@@ -69,7 +69,14 @@ class SoineViewController: UIViewController {
             Utilities.settingBackground(playerView: &imageView, _image: image ?? UIImage(),scale: scale)
             
             //ここからボイス
-            audioPlayer = try AVAudioPlayer(data: voice!,fileTypeHint: voiceFileExtention)
+            if voiceFilePath != nil {
+                if voiceFilePath!.startAccessingSecurityScopedResource() {
+//                    let fileName = voiceFilePath!.lastPathComponent
+                    let fileExtention = voiceFilePath!.pathExtension
+                    Task{
+                        let fileData = try await self.read()
+                        print("Data : \(fileData)")
+                        audioPlayer = try AVAudioPlayer(data: fileData,fileTypeHint: fileExtention)
 
             // AVAudioPlayerのデリゲートをセット
             audioPlayer.delegate = self

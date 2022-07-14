@@ -39,6 +39,8 @@
 		CFD4CB762812DF4A00D746B2 /* soineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB752812DF4A00D746B2 /* soineTests.swift */; };
 		CFD4CB802812DF4A00D746B2 /* soineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB7F2812DF4A00D746B2 /* soineUITests.swift */; };
 		CFD4CB822812DF4A00D746B2 /* soineUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4CB812812DF4A00D746B2 /* soineUITestsLaunchTests.swift */; };
+		CFDBCE28281ECDCC00445950 /* SoineData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBCE26281ECDCC00445950 /* SoineData+CoreDataProperties.swift */; };
+		CFDBCE29281ECDCC00445950 /* SoineData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBCE27281ECDCC00445950 /* SoineData+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +118,8 @@
 		CFD4CB7B2812DF4A00D746B2 /* soineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD4CB7F2812DF4A00D746B2 /* soineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soineUITests.swift; sourceTree = "<group>"; };
 		CFD4CB812812DF4A00D746B2 /* soineUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = soineUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CFDBCE26281ECDCC00445950 /* SoineData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFDBCE27281ECDCC00445950 /* SoineData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoineData+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -498,6 +502,7 @@
 				CF42F98D28756BE100A0591A /* SoineData+CoreDataClass.swift in Sources */,
 				CFD4CB662812DF4000D746B2 /* soine.xcdatamodeld in Sources */,
 				CF4DA6B02812EA580084B7E5 /* SettingsTableViewController.swift in Sources */,
+				CFDBCE29281ECDCC00445950 /* SoineData+CoreDataClass.swift in Sources */,
 				CFD4CB602812DF4000D746B2 /* ViewController.swift in Sources */,
 				CF0FA1A3281D6AA80089586D /* TableViewCell_list.swift in Sources */,
 				CFD4CB5C2812DF4000D746B2 /* AppDelegate.swift in Sources */,
