@@ -215,6 +215,7 @@ class SettingsTableViewController: UITableViewController{
         let request_ad: NSFetchRequest<SoineData> = SoineData.fetchRequest()
         do {
             request.predicate = NSPredicate(format: "adFlg = true")
+            request_ad.predicate = NSPredicate(format: "adFlg = false")
             var fetchResults = try viewContext.fetch(request)
             adCount = fetchResults.count
             fetchResults = try viewContext.fetch(request_ad)
