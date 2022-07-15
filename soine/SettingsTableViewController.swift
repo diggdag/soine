@@ -351,7 +351,7 @@ class SettingsTableViewController: UITableViewController{
             //ad - add
             //ad - change
             if !change || adFlag {
-                let next_id = getNextId()
+                let next_id = Utilities.getNextId(viewContext: viewContext)
                 let soineData = NSEntityDescription.entity(forEntityName: "SoineData", in: viewContext)
                 let record = NSManagedObject(entity: soineData!, insertInto: viewContext) as! SoineData
                 record.id = next_id
@@ -472,33 +472,6 @@ class SettingsTableViewController: UITableViewController{
             })
             self.present(alert, animated: true, completion: nil)
         }
-    }
-    func getMaxId() -> Int16? {
-        var max_id:Int16?
-        do{
-            let request_max: NSFetchRequest<SoineData> = SoineData.fetchRequest()
-            request_max.fetchLimit = 1
-            let sortDescriptor = NSSortDescriptor(key: "id", ascending: false)
-            let sortDescriptors = [sortDescriptor]
-            request_max.sortDescriptors = sortDescriptors
-            let fetchResults = try viewContext.fetch(request_max)
-            if fetchResults.count != 0 {
-                max_id = fetchResults[0].id
-            }
-        } catch let e as NSError{
-            print("error !!! : \(e)")
-        }
-        return max_id
-    }
-    func getNextId() -> Int16 {
-        var max_id = getMaxId()
-        if max_id == nil {
-            max_id = 0
-        }
-        else{
-            max_id = max_id! + 1
-        }
-        return max_id!
     }
     func addBannerViewToView(_ bannerView: GADBannerView) {
         bannerView.translatesAutoresizingMaskIntoConstraints = false

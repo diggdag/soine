@@ -317,4 +317,30 @@ extension ViewController:UITableViewDelegate{
             refrechData()
         }
     }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        print("(\(sourceIndexPath.section),\(sourceIndexPath.row))->(\(destinationIndexPath.section),\(destinationIndexPath.row))")
+        //セクション間移動
+        if sourceIndexPath.section != destinationIndexPath.section {
+            refrechData()
+            return
+        }
+        let category = datas[sourceIndexPath.section][sourceIndexPath.row]
+        datas[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+        datas[sourceIndexPath.section].insert(category, at: destinationIndexPath.row)
+        var data_tmp: [SoineData] = []
+        let next_id = Utilities.getNextId(viewContext: viewContext)
+        for (i,data) in datas[sourceIndexPath.section].enumerated() {
+//            data.id = Int16(i) + next_id
+            data.id = Int16(datas[sourceIndexPath.section].count - 1 - i) + next_id
+            data_tmp.append(data)
+        }
+        datas[sourceIndexPath.section] = data_tmp
+        do{
+            try viewContext.save()
+        } catch let e as NSError{
+            print("error !!! : \(e)")
+        }
+        refrechData()
+    }
+
 }
