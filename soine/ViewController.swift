@@ -226,7 +226,7 @@ extension ViewController:UITableViewDataSource{
         if soineData.adFlg {
             let cell: TableViewCell_list_ad = tableView.dequeueReusableCell(withIdentifier: "TableViewCell_list_ad") as! TableViewCell_list_ad
 //            cell.setCell(unitId: "ca-app-pub-3940256099942544/2934735716", rootViewController: self)
-            cell.setCell(unitId: "ca-app-pub-5418872710464793/1165352137", rootViewController: self)
+            cell.setCell(unitId: "ca-app-pub-5418872710464793/1165352137", rootViewController: self, _id: soineData.id)
             
 //            let bannerViewCell:GADBannerView!
 //
@@ -242,7 +242,7 @@ extension ViewController:UITableViewDataSource{
         let voiceName: String = soineData.voiceName == nil ? "" : soineData.voiceName!
 //        let categoryId: String = soineData.categoryData == nil ? "" : String(soineData.categoryData!.categoryId)
         cell.setCell(data: Data_list(
-            voiceName: "\(voiceName)", category: image, scale: CGFloat(soineData.scale)))//\(String(soineData.id)):
+            voiceName: (Consts.DEBUG_FLG ? "\(soineData.id):\(voiceName)":"\(voiceName)"), category: image, scale: CGFloat(soineData.scale)))//\(String(soineData.id)):
         cell.backgroundColor = UIColor.clear
         cell.contentView.backgroundColor = UIColor.clear
         cell.btn.isHidden = false
@@ -278,7 +278,15 @@ extension ViewController:UITableViewDataSource{
         return index
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section].name
+        if Consts.DEBUG_FLG {
+            let id = sections[section].categoryId ?? 999
+            let name = sections[section].name ?? ""
+            
+            return "\(id):\(name)"
+        }
+        else{
+            return sections[section].name
+        }
     }
 }
 extension ViewController:UITableViewDelegate{

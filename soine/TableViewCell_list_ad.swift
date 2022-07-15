@@ -9,7 +9,11 @@ import UIKit
 import GoogleMobileAds
 class TableViewCell_list_ad: UITableViewCell {
     @IBOutlet weak var ad: GADBannerView!
-    func setCell(unitId:String,rootViewController:UIViewController) {
+    @IBOutlet weak var id: UILabel!
+    func setCell(unitId:String,rootViewController:UIViewController,_id:Int16) {
+        if Consts.DEBUG_FLG {
+            id.text = String(_id)
+        }
         ad.adUnitID = unitId
         ad.rootViewController = rootViewController
         ad.load(GADRequest())
