@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         bannerView.adUnitID = "ca-app-pub-5418872710464793/4324956840"
         bannerView.rootViewController = self
         addBannerViewToView(bannerView)
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [Consts.ADMOB_TEST_DEVICE_ID,Consts.ADMOB_TEST_DEVICE_ID_SE2]
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [Consts.ADMOB_TEST_DEVICE_ID,Consts.ADMOB_TEST_DEVICE_ID_SE2]
         bannerView.load(GADRequest())
     }
     func refrechData() {
