@@ -339,7 +339,7 @@ extension ViewController:UITableViewDelegate{
         let next_id = Utilities.getNextId(viewContext: viewContext)
         for (i,data) in datas[sourceIndexPath.section].enumerated() {
 //            data.id = Int16(i) + next_id
-            data.id = Int16(datas[sourceIndexPath.section].count - 1 - i) + next_id
+            data.id = Int32(datas[sourceIndexPath.section].count - 1 - i) + next_id
             data_tmp.append(data)
         }
         datas[sourceIndexPath.section] = data_tmp

@@ -15,7 +15,7 @@ class SoineViewController: UIViewController {
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!
     var audioPlayer:AVAudioPlayer!
-    var targetId:Int16 = 0
+    var targetId:Int32 = 0
     @IBOutlet weak var top_constraint: NSLayoutConstraint!
     
     

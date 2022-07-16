@@ -27,7 +27,7 @@ class SettingsTableViewController: UITableViewController{
     @IBOutlet weak var intervalLabel: UILabel!
     @IBOutlet weak var loopFlagTitleLabel: UILabel!
     @IBOutlet weak var intervalTitleLabel: UILabel!
-    var targetId:Int16? = nil
+    var targetId:Int32? = nil
     
     var appDelegate:AppDelegate!
     var viewContext:NSManagedObjectContext!

@@ -62,8 +62,8 @@ class Utilities {
         return UIImage(cgImage: img.cgImage!, scale: img.scale, orientation: .up)
     }
     
-    static func getMaxId(viewContext:NSManagedObjectContext) -> Int16? {
-        var max_id:Int16?
+    static func getMaxId(viewContext:NSManagedObjectContext) -> Int32? {
+        var max_id:Int32?
         do{
             let request_max: NSFetchRequest<SoineData> = SoineData.fetchRequest()
             request_max.fetchLimit = 1
@@ -79,7 +79,7 @@ class Utilities {
         }
         return max_id
     }
-    static func getNextId(viewContext:NSManagedObjectContext) -> Int16 {
+    static func getNextId(viewContext:NSManagedObjectContext) -> Int32 {
         var max_id = getMaxId(viewContext: viewContext)
         if max_id == nil {
             max_id = 0
@@ -87,6 +87,7 @@ class Utilities {
         else{
             max_id = max_id! + 1
         }
+//        print("max id : \(String(describing: max_id))")
         return max_id!
     }
 }
