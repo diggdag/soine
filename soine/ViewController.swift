@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         print("ViewController viewWillAppear")
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         viewContext = appDelegate.persistentContainer.viewContext
-        refrechData()
+        refreshData()
         
     }
     @objc func myEvent() {
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
 //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [Consts.ADMOB_TEST_DEVICE_ID,Consts.ADMOB_TEST_DEVICE_ID_SE2]
         bannerView.load(GADRequest())
     }
-    func refrechData() {
+    func refreshData() {
         updateIsNonCategorize()
         appendSections()
         datas = []
@@ -322,14 +322,14 @@ extension ViewController:UITableViewDelegate{
             let screenSizeHeight = UIScreen.main.bounds.height
             self.view.makeToast("削除しました", point: CGPoint(x: screenSizeWidth/2, y: screenSizeHeight/2), title: nil, image: nil, completion: nil)
             
-            refrechData()
+            refreshData()
         }
     }
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         print("(\(sourceIndexPath.section),\(sourceIndexPath.row))->(\(destinationIndexPath.section),\(destinationIndexPath.row))")
         //セクション間移動
         if sourceIndexPath.section != destinationIndexPath.section {
-            refrechData()
+            refreshData()
             return
         }
         let category = datas[sourceIndexPath.section][sourceIndexPath.row]
@@ -348,7 +348,7 @@ extension ViewController:UITableViewDelegate{
         } catch let e as NSError{
             print("error !!! : \(e)")
         }
-        refrechData()
+        refreshData()
     }
 
 }
