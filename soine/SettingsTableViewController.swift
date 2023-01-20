@@ -68,7 +68,7 @@ class SettingsTableViewController: UITableViewController{
         self.view.addSubview(ActivityIndicator)
         
         let backButton = UIBarButtonItem()
-        backButton.title = "もどる"
+//        backButton.title = "もどる"
         navigationItem.backBarButtonItem = backButton
         
         // In this case, we instantiate the banner with desired ad size.
